@@ -2,11 +2,11 @@
 A meta repository used for guides, scripts and other useful information for the Lanturn RoboSub
 
 ## TODO
-- [] Add a safety catch for when directories already exist when cloning github repositories
-- [] Make sure ~/.local/bin is in PATH environment
-- [] Add home/ directory for configuration files
-- [] Add a WORKSPACE variable
-- [] Automate set up of configuration files and repositories
+- [ ] Add a safety catch for when directories already exist when cloning github repositories
+- [ ] Make sure ~/.local/bin is in PATH environment
+- [ ] Add home/ directory for configuration files
+- [ ] Add a WORKSPACE variable
+- [ ] Automate set up of configuration files and repositories
 
 
 ## Nvidia Tegra X2 
