@@ -1,19 +1,35 @@
 # lanturn
-A meta repository used for guides, scripts and other useful information for the Lanturn RoboSub
+A meta-repository used for guides, scripts and other useful information for the
+Lanturn RoboSub
+
+<!-- TODO: add image of lanturn -->
 
 ## TODO
-- [ ] Add a safety catch for when directories already exist when cloning github repositories
-- [ ] Make sure ~/.local/bin is in PATH environment
+- [ ] downlaod all github repos script
+    - [ ] Add a safety catch for when directories already exist when cloning github repositories
+    - [ ] 
+- [ ] Make sure ~/local/bin is in PATH environment
 - [ ] Add home/ directory for configuration files
 - [ ] Add a WORKSPACE variable
+- [ ] Add SSH source script
 - [ ] Automate set up of configuration files and repositories
+- [ ] Describe Tegra X2 module and carrier board
+- [ ] Automate auto login set up
+- [ ] Add a directory to save rosbag files to
+- [ ] Add commands for SSH login
+- [ ] Add instructions on how to use Fathom-X
 
 
-## Nvidia Tegra X2 
-<!-- indlude schemaric for carrier board -->
+## Nvidia Jetson TX2 
+<!-- indlude schematic for carrier board -->
 <!-- explain usage of sdk manager -->
 <!-- manage nvidias's sdk with sdk manager -->
 <!-- what sdks from nvidia do we use? -->
+Lanturn uses the [Nvidia Jetson TX2 Module](https://developer.nvidia.com/embedded/jetson-tx2)
+connected to the carrier board (P2597) that comes with the
+[Nvidia Jetson TX2 Developer Kit](https://developer.download.nvidia.com/embedded/L4T/r32-3-1_Release_v1.0/jetson_tx2_developer_kit_user_guide.pdf).
+However, in the future, the carrier board will be switched out with a
+[Quasar Carrier Board](https://connecttech.com/product/quasar-carrier-nvidia-jetson-tx2/).
 
 ### Nvidia SDK Manager
 To flash, back up and upgrade the software in the TX2, download the 
@@ -24,12 +40,6 @@ To flash, back up and upgrade the software in the TX2, download the
 ### Method 1: Install L4T with SDK Manager then upgrade to Ubuntu 20.04
 
 <!-- Flash TX2 with Ubuntu 18.04 -->
-<!-- add nvidia ppa -->
-<!-- install a specific version of jetpack -->
-
-### Method 2: Install Ubuntu 20.04 then add L4T
-
-
 ### Flash the TX2
 
 Connect the computer with the SDK Manager to the TX2's Micro-USB AB connector.
@@ -37,7 +47,13 @@ Connect the computer with the SDK Manager to the TX2's Micro-USB AB connector.
 Once connected, launch the SDK Manager and boot up the TX2 in Recovery Mode.
 
 
-## Set SSH
+### Method 2: Install Ubuntu 20.04 then add L4T
+
+<!-- add nvidia ppa -->
+<!-- install a specific version of jetpack -->
+
+
+## Setup SSH
 Lanturn has a [Fathom-X](https://bluerobotics.com/store/comm-control-power/tether-interface/fathom-x-tether-interface-board-set-copy/)
 onboard, which can be used to establish a connection with another computer.
 
