@@ -49,6 +49,34 @@ Once connected, launch the SDK Manager and boot up the TX2 in Recovery Mode.
 
 ### Method 2: Install Ubuntu 20.04 then add L4T
 
+1. Get SD Card atleast 16 GB of free space
+2. Remove software packages you don't need immediately (like LibreOffice, Chromium, and OpenCV)
+    Note: removal helps speed up this process so you can reinstall later
+3. When step 2 is done, update, upgrade, and clean up your system with the following commands:
+```
+# remove Chromium and OpenCV
+$ sudo apt-get remove --purge chromium-browser chromium-browser-l10n
+# refresh your system
+$ sudo apt-get update
+# need nano for editing some files
+$ sudo apt-get install nano
+$ sudo apt-get upgrade
+$ sudo apt-get autoremove
+```
+4. use the nano command to edit etc/update-manager/release-upgrades
+   ```$ sudo nano /etc/update-manager/release-upgrades```
+   set the ```prompt=normal```
+   This will enable distribution upgrades in the update manager 
+   Note: to close nano, use the following: <Ctrl>+<X>, <Y> and <Enter>
+5. refresh your system, upgrade your distro, and reboot
+    This will refresh the software database again.
+    ```
+        # refresh your system again
+        $ sudo apt-get update
+        $ sudo apt-get dist-upgrade
+        $ sudo reboot
+    ```
+
 <!-- add nvidia ppa -->
 <!-- install a specific version of jetpack -->
 
