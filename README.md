@@ -50,33 +50,133 @@ Once connected, launch the SDK Manager and boot up the TX2 in Recovery Mode.
 ### Method 2: Install Ubuntu 20.04 then add L4T
 
 1. Get SD Card atleast 16 GB of free space
-2. Remove software packages you don't need immediately (like LibreOffice, Chromium, and OpenCV)
-    Note: removal helps speed up this process so you can reinstall later
-3. When step 2 is done, update, upgrade, and clean up your system with the following commands:
-```
-# remove Chromium and OpenCV
-$ sudo apt-get remove --purge chromium-browser chromium-browser-l10n
-# refresh your system
-$ sudo apt-get update
-# need nano for editing some files
-$ sudo apt-get install nano
-$ sudo apt-get upgrade
-$ sudo apt-get autoremove
-```
-4. use the nano command to edit etc/update-manager/release-upgrades
-   ```$ sudo nano /etc/update-manager/release-upgrades```
-   set the ```prompt=normal```
-   This will enable distribution upgrades in the update manager 
-   Note: to close nano, use the following: <Ctrl>+<X>, <Y> and <Enter>
-5. refresh your system, upgrade your distro, and reboot
-    This will refresh the software database again.
+2. Check Ubuntu version
     ```
-        # refresh your system again
+    $ lsb_release -a
+    ```
+3. Remove software packages you don't need immediately (like LibreOffice, Chromium, and OpenCV)
+   
+   Note: removal of programs helps speed up this process and you can reinstall later
+    ```
+    $ sudo apt-get remove --purge libreoffice*
+    $ sudo apt-get remove --purge chromium-browser chromium-browser-l10n
+    $ sudo apt-get purge '*opencv*'
+    $ sudo apt-get purge firefox
+    ```    
+4. get nano installed to edit files, or use vim if preferred
+    ```
+    $ sudo apt-get install nano
+    ```
+5. When step 3 is done, update, upgrade, and clean up your system with the following commands:
+   
+   Note: make sure to connect to the internet
+    ``` 
+    $ sudo apt-get update 
+    $ sudo apt-get upgrade   
+    $ sudo apt-get autoremove
+    ```    
+6. use the nano command to edit the file /etc/update-manager/release-upgrades
+   ```
+   $ sudo nano /etc/update-manager/release-upgrades
+   ```
+   set the ```prompt=lts```
+   This will enable distribution upgrades in the update manager 
+   
+   Note: to close nano, use the following: 
+   
+   <kbd>Ctrl</kbd> + <kbd>X</kbd>, then <kbd>Y</kbd>, then <kbd>Enter</kbd>
+7. refresh your system, upgrade your distro, and reboot
+    ```
         $ sudo apt-get update
         $ sudo apt-get dist-upgrade
         $ sudo reboot
     ```
-
+8. all preparations are finished. This step is to upgrade to Ubuntu 20 (took 30 min)
+    ```
+    $ sudo do-release-upgrade
+    ```
+7. enter <kbd>Y</kbd> when prompted "Do you want to start the upgrade?" followed by text about packages
+8. enter <kbd>Y</kbd> when prompted "Remove obsolete packages?" followed by text about packages (100+ packages)
+Note: this next step is **IMPORTANT.** We still need to finish editing files.
+9. enter <kbd>N</kbd> when prompted "Restart required" followed by "To finish the upgrade, a restart is required."
+10. check if this line ```WaylandEnabe=false```is active in /etc/gdm3/custom.conf
+    ```
+    $ sudo nano /etc/gdm3/custom.conf
+    ```
+11. Uncomment (remove the "#" before the line) ```# Driver "nvidia"``` in the file /etc/X11/xorg.conf
+    ```
+    $ sudo nano /etc/X11/xorg.conf
+    ```
+12. Reset the upgrade manager to ```never``` in the file /etc/update=manager/release-upgrades
+    ```
+    $ sudo nano /etc/update=manager/release-upgrades
+    ```
+13. reboot
+    ```
+    $ sudo reboot
+    ```
+14. check Ubuntu version
+    ```
+    $ lsb_release -a
+    ```
+15. delete directory /usr/share/vulkan/icd.d
+    ```
+    $ sudo rm -rf /usr/share/vulkan/icd.d
+    ```
+16. updates
+    ```
+    $ sudo apt-get update
+    $ sudo apt-get upgrade
+    $ sudo apt-get autoremove
+    ```
+17. Remove circular symlink
+    ```
+    $ sudo rm /usr/share/applications/vpil_demos
+    ```
+18. remove distorted nvidia logo in top bar
+    ```
+    $ cd /usr/share/nvpmodel_indicator
+    $ sudo mv nv_logo.svg no_logo.svg
+    ```
+19. remove the "#" before the line ```# deb file:///var/visionworks-repo / # disabled on upgrade to focal``` in the file /etc/apt/sources.list.d/visionworks-repo.list 
+    ```
+    $ sudo nano /etc/apt/sources.list.d/visionworks-repo.list 
+    ```
+20. gcc update (install gcc, g++ version 8, and setup the gcc selector)
+    ```    
+    $ sudo apt-get install gcc-8 g++-8    
+    $ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+    $ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+    $ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+    $ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+    $ sudo update-alternatives --config gcc
+    $ sudo update-alternatives --config g++
+    ```
+    Note: select option 1 from list, it should say **Path** is /usr/bin/g++-8 and **Priority** is 8, not 9
+21. install firefox if not still uninstalled
+    Note: do not install Chromium because it will interfere with Snap installation
+    ```
+    $ sudo apt install firefox
+    ```
+22. upgrade
+    ```
+    $ sudo apt-get upgrade
+    ```
+23. fix correct version
+    ```
+    $ sudo apt --fix-broken install
+    $ sudo dpkg -i --force-overwrite /var/cache/apt/archives/nvidia-l4t-init_32.6.1-20210916211029_arm64.deb
+    ```
+24. overwrite /etc/systemd/sleep.conf (force upgrade)
+    Note: location of nvidia-l4t-init file is given in the output of the previous fix-broken command
+    ```
+    $ sudo dpkg -i --force-overwrite
+    ```
+25. nvidia-l4t-init should be installed successfully, now upgrade
+    ```
+    $ sudo apt-get upgrade
+    ```
+ 
 <!-- add nvidia ppa -->
 <!-- install a specific version of jetpack -->
 
