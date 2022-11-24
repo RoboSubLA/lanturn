@@ -47,139 +47,199 @@ Connect the computer with the SDK Manager to the TX2's Micro-USB AB connector.
 Once connected, launch the SDK Manager and boot up the TX2 in Recovery Mode.
 
 
-### Method 2: Install Ubuntu 20.04 then add L4T
+### Method 2: [Install Ubuntu 20.04 then add L4T](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html)
 
+####    Section 1: Upgrade of the Ubuntu system 
 1. Get SD Card atleast 16 GB of free space
 2. Check Ubuntu version
     ```
-    $ lsb_release -a
+    #prints Ubuntu version number (ex. 18.04)
+    lsb_release -a
     ```
 3. Remove software packages you don't need immediately (like LibreOffice, Chromium, and OpenCV)
    
    Note: removal of programs helps speed up this process and you can reinstall later
     ```
-    $ sudo apt-get remove --purge libreoffice*
-    $ sudo apt-get remove --purge chromium-browser chromium-browser-l10n
-    $ sudo apt-get purge '*opencv*'
-    $ sudo apt-get purge firefox
+    #remove libreoffice 
+    sudo apt-get remove --purge libreoffice*
+    
+    #remove chromium browser
+    sudo apt-get remove --purge chromium-browser chromium-browser-l10n
+    
+    #remove OpenCV
+    sudo apt-get purge '*opencv*'
+    
+    #remove firefox
+    sudo apt-get purge firefox
     ```    
-4. get nano installed to edit files, or use vim if preferred
-    ```
-    $ sudo apt-get install nano
-    ```
-5. When step 3 is done, update, upgrade, and clean up your system with the following commands:
+4. When step 3 is done, update, upgrade, and clean up your system with the following commands:
    
    Note: make sure to connect to the internet
     ``` 
-    $ sudo apt-get update 
-    $ sudo apt-get upgrade   
-    $ sudo apt-get autoremove
+    #update your system
+    sudo apt-get update 
+    
+    #upgrade your system
+    sudo apt-get upgrade   
+    
+    #autoremove specific packages from linux
+    sudo apt-get autoremove
     ```    
-6. use the nano command to edit the file /etc/update-manager/release-upgrades
-   ```
-   $ sudo nano /etc/update-manager/release-upgrades
-   ```
-   set the ```prompt=lts```
-   This will enable distribution upgrades in the update manager 
    
-   Note: to close nano, use the following: 
-   
-   <kbd>Ctrl</kbd> + <kbd>X</kbd>, then <kbd>Y</kbd>, then <kbd>Enter</kbd>
-7. refresh your system, upgrade your distro, and reboot
+5. use the sed command which will automatically edit and save the file /etc/update-manager/release-upgrades
+
+    Note: "-i" will save the content and you cannot undo changes
+
     ```
-        $ sudo apt-get update
-        $ sudo apt-get dist-upgrade
-        $ sudo reboot
+    #if Prompt is set to never, change to lts, and save 
+    sudo sed -i 's/=never/=lts/' /etc/update-manager/release-upgrades
+
+
+    #if Prompt is set to normal, change to lts, and save 
+    sudo sed -i 's/=normal/=lts/' /etc/update-manager/release-upgrades
     ```
-8. all preparations are finished. This step is to upgrade to Ubuntu 20 (took 30 min)
+
+6. refresh your system, upgrade your distro, and reboot
     ```
-    $ sudo do-release-upgrade
+    #update your system
+    sudo apt-get update
+    
+    #upgrade your distro
+    sudo apt-get dist-upgrade
+    
+    #reboot your system
+    sudo reboot
     ```
-7. enter <kbd>Y</kbd> when prompted "Do you want to start the upgrade?" followed by text about packages
-8. enter <kbd>Y</kbd> when prompted "Remove obsolete packages?" followed by text about packages (100+ packages)
-Note: this next step is **IMPORTANT.** We still need to finish editing files.
-9. enter <kbd>N</kbd> when prompted "Restart required" followed by "To finish the upgrade, a restart is required."
-10. check if this line ```WaylandEnabe=false```is active in /etc/gdm3/custom.conf
+7. all preparations are finished. This step is to upgrade to Ubuntu 20 (took 30+ min)
     ```
-    $ sudo nano /etc/gdm3/custom.conf
+    #upgrade your Ubuntu version release
+    sudo do-release-upgrade
     ```
-11. Uncomment (remove the "#" before the line) ```# Driver "nvidia"``` in the file /etc/X11/xorg.conf
+8. enter <kbd>Y</kbd> when prompted "Do you want to start the upgrade?" followed by text about packages
+9. enter <kbd>Y</kbd> when prompted "Remove obsolete packages?" followed by text about packages (100+ packages)
+    
+    Note: this next step is **<ins>important.</ins>** We still need to finish editing files.
+    
+10. enter <kbd>N</kbd> when prompted "Restart required. [...] To finish the upgrade, a restart is required."
+11. use the sed command which will check if this line ```WaylandEnabe=false```is active in /etc/gdm3/custom.conf
     ```
-    $ sudo nano /etc/X11/xorg.conf
-    ```
-12. Reset the upgrade manager to ```never``` in the file /etc/update=manager/release-upgrades
-    ```
-    $ sudo nano /etc/update=manager/release-upgrades
-    ```
-13. reboot
-    ```
-    $ sudo reboot
-    ```
-14. check Ubuntu version
-    ```
-    $ lsb_release -a
-    ```
-15. delete directory /usr/share/vulkan/icd.d
-    ```
-    $ sudo rm -rf /usr/share/vulkan/icd.d
-    ```
-16. updates
-    ```
-    $ sudo apt-get update
-    $ sudo apt-get upgrade
-    $ sudo apt-get autoremove
-    ```
-17. Remove circular symlink
-    ```
-    $ sudo rm /usr/share/applications/vpil_demos
-    ```
-18. remove distorted nvidia logo in top bar
-    ```
-    $ cd /usr/share/nvpmodel_indicator
-    $ sudo mv nv_logo.svg no_logo.svg
-    ```
-19. remove the "#" before the line ```# deb file:///var/visionworks-repo / # disabled on upgrade to focal``` in the file /etc/apt/sources.list.d/visionworks-repo.list 
-    ```
-    $ sudo nano /etc/apt/sources.list.d/visionworks-repo.list 
-    ```
-20. gcc update (install gcc, g++ version 8, and setup the gcc selector)
+    #uncomment and enable the line (WaylandEnable=false) found in /etc/gdm3/custom.conf
+    sed -i 's/# WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+
+    #incase there is no space in between the '#' and 'W'
+    sed -i 's/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
     ```    
-    $ sudo apt-get install gcc-8 g++-8    
-    $ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
-    $ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
-    $ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
-    $ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
-    $ sudo update-alternatives --config gcc
-    $ sudo update-alternatives --config g++
+    
+12. use the sed command which will uncomment (by removing the "#" before the line) ```# Driver "nvidia"``` in the file /etc/X11/xorg.conf
+    ```
+    #uncomment and enable the line (Driver "nvidia") found in /etc/X11/xorg.conf 
+    sed 's/# Driver "nvidia"/Driver "nvidia"/' /etc/X11/xorg.conf 
+
+    #incase there is no space in between the '#' and 'W'
+    sed 's/#Driver "nvidia"/Driver "nvidia"/' /etc/X11/xorg.conf 
+    ```
+
+13. this command will reset the upgrade manager to "never" in the file /etc/update=manager/release-upgrades    
+    ```
+    #set Prompt is never 
+    sudo sed -i 's/=lts/=never/' /etc/update-manager/release-upgrades
+    ```
+
+14. reboot
+    ```
+    sudo reboot
+    ```
+    
+####    Section 2: The post-upgrade configuration    
+15. check Ubuntu version
+    ```
+    lsb_release -a
+    ```
+16. delete directory /usr/share/vulkan/icd.d
+    ```
+    sudo rm -rf /usr/share/vulkan/icd.d
+    ```
+17. updates
+    ```
+    #update your system
+    sudo apt-get update 
+    
+    #upgrade your system
+    sudo apt-get upgrade   
+    
+    #autoremove specific packages from linux
+    sudo apt-get autoremove
+    ```
+18. Remove circular symlink
+    ```
+    sudo rm /usr/share/applications/vpil_demos
+    ```
+19. remove distorted nvidia logo in top bar
+    ```
+    #change into the directy called /usr/share/nvpmodel_indicator
+    cd /usr/share/nvpmodel_indicator
+    
+    #move the contents of file "nv_logo.svg" to file "no_logo.svg"
+    sudo mv nv_logo.svg no_logo.svg
+    ```
+20. remove the "#" before the line ```# deb file:///var/visionworks-repo / # disabled on upgrade to focal``` in the file /etc/apt/sources.list.d/visionworks-repo.list 
+    ```
+    sudo sed -i 's/# deb file/deb file/' /etc/apt/sources.list.d/visionworks-repo.list 
+    ```
+21. gcc update (install gcc, g++ version 8, and setup the gcc selector)
+    ```    
+    #install GNU compiler collection to run programs written in C (gcc) and C++ (g++)
+    sudo apt-get install gcc-8 g++-8        
+    
+    # add gcc (C) version 9 to selector
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+    
+    # add gcc (C) version 8 to selector
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+    
+    # add g++ (C++) version 9 to selector
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+    
+    # add g++ (C++) version 8 to selector
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+    
+    # setup the gcc selector
+    sudo update-alternatives --config gcc
+    
+    # setup the g++ selector
+    sudo update-alternatives --config g++
     ```
     Note: select option 1 from list, it should say **Path** is /usr/bin/g++-8 and **Priority** is 8, not 9
-21. install firefox if not still uninstalled
+    
+22. install firefox if not already automatically installed
     Note: do not install Chromium because it will interfere with Snap installation
     ```
-    $ sudo apt install firefox
+    sudo apt install firefox
     ```
-22. upgrade
+23. upgrade
     ```
-    $ sudo apt-get upgrade
+    sudo apt-get upgrade
     ```
-23. fix correct version
+24. fix correct version
     ```
-    $ sudo apt --fix-broken install
-    $ sudo dpkg -i --force-overwrite /var/cache/apt/archives/nvidia-l4t-init_32.6.1-20210916211029_arm64.deb
+    #fix broken install
+    sudo apt --fix-broken install
+    
+    #overwrite nvidia-l4t-init file
+    sudo dpkg -i --force-overwrite /var/cache/apt/archives/nvidia-l4t-init_32.6.1-20210916211029_arm64.deb
     ```
-24. overwrite /etc/systemd/sleep.conf (force upgrade)
-    Note: location of nvidia-l4t-init file is given in the output of the previous fix-broken command
+25. overwrite /etc/systemd/sleep.conf (force upgrade)
+    Note: location of nvidia-l4t-init file is given in the output of the previous fix-broken command from step 23.
     ```
-    $ sudo dpkg -i --force-overwrite
+    sudo dpkg -i --force-overwrite
     ```
-25. nvidia-l4t-init should be installed successfully, now upgrade
+26. nvidia-l4t-init should be installed successfully, now upgrade
     ```
-    $ sudo apt-get upgrade
+    sudo apt-get upgrade
     ```
- 
+    
 <!-- add nvidia ppa -->
 <!-- install a specific version of jetpack -->
-
 
 ## Setup SSH
 Lanturn has a [Fathom-X](https://bluerobotics.com/store/comm-control-power/tether-interface/fathom-x-tether-interface-board-set-copy/)
