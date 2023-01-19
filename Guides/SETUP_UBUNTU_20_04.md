@@ -3,6 +3,9 @@
 <!-- Flash TX2 with Ubuntu 18.04 -->
 <!-- Another way to possibly do this is to flash the TX2 with an Ubuntu 20.04 image -->
 
+Presumably, the TX2 is flashed with Ubuntu 18.04.
+<!-- TODO: add a link to the SDK Manager page -->
+
 These steps were grabbed from a guide by qengineering that upgrades a Jetson Nano to Ubuntu 20.04;
 found [here](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html).
 
