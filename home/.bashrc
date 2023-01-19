@@ -72,3 +72,6 @@ up () {
   fi
 }
 
+# ROS
+alias noetic="source /opt/ros/noetic/setup.bash"
+alias foxy="source /opt/ros/foxy/setup.bash"
