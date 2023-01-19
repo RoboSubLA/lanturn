@@ -5,9 +5,8 @@ Lanturn RoboSub
 <!-- TODO: add image of lanturn -->
 
 ## TODO
-- [ ] downlaod all github repos script
+- [ ] Downlaod all github repos script
     - [ ] Add a safety catch for when directories already exist when cloning github repositories
-    - [ ] 
 - [ ] Make sure ~/local/bin is in PATH environment
 - [ ] Add home/ directory for configuration files
 - [ ] Add a WORKSPACE variable
