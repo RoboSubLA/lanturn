@@ -1,20 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Academic Title Page
-% LaTeX Template
-% Version 2.0 (17/7/17)
-%
-% This template was downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Original author:
-% WikiBooks (LaTeX - Title Creation) with modifications by:
-% Vel (vel@latextemplates.com)
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %-------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %-------------------------------------------------------------------------------
@@ -26,9 +9,11 @@
 
 \usepackage{mathpazo}       % Palatino font
 
+\usepackage{datetime}       % Required for date formatting
 \usepackage{geometry}       % Required for margins
 \usepackage{graphicx}       % Required for adding images
 \usepackage{hyperref}       % Required for adding hyperlinks
+\usepackage{tabularx}       % Required for easier to manage tables
 
 
 \geometry{                  % Geometry setup
@@ -122,7 +107,10 @@
 %-------------------------------------------------------------------------------
 % Table of Contents
 %-------------------------------------------------------------------------------
+\renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
+\label{sec:toc}
+\addcontentsline{toc}{section}{\nameref{sec:toc}}
 \newpage
 %-------------------------------------------------------------------------------
 
@@ -131,17 +119,32 @@
 %-------------------------------------------------------------------------------
 
 \section*{Revision History}
-\pagebreak
+\label{sec:revision}
+\addcontentsline{toc}{section}{\nameref{sec:revision}}
+
+% define column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
+
+% define table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{6em} | X | P{9em} |}
+        \hline
+        \textbf{Version}    & \textbf{Changes}      & \textbf{Date} \\
+        \hline
+        1.0     & First release of Software Requirements Document. & 9 December 2022 \\ 
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:revision}Revision History}
+}
+\end{table}
+
+\newpage
 
 %-------------------------------------------------------------------------------
 % Content
 %-------------------------------------------------------------------------------
-
-\section{Table of Contents}
-\label{sec:toc}
-
-\section{Revision History}
-\label{sec:revision}
 
 \section{Introduction}
 \label{sec:introduction}
@@ -191,6 +194,7 @@
 \subsection{Apportionment of Requirements}
 \label{sec:apportionment}
 
+\newpage % ---------------------------------------------------------------
 \section{External Interface Requirements}
 \label{sec:external}
 
