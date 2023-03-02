@@ -1,0 +1,22 @@
+\section*{Revision History}
+\label{sec:revision}
+\addcontentsline{toc}{section}{\nameref{sec:revision}}
+
+% define column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
+
+% define table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{6em} | X | P{9em} |}
+        \hline
+        \textbf{Version}    & \textbf{Changes}      & \textbf{Date} \\
+        \hline
+        1.0     & First release of Software Requirements Document. & 9 December 2022 \\ 
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:revision}Revision History}
+}
+\end{table}
+
