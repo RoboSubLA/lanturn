@@ -1,0 +1,22 @@
+\renewcommand{\contentsname}{Revision History}
+\section*{Revision History}
+\label{sec:revision}
+\addcontentsline{toc}{section}{\nameref{sec:revision}}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
+
+% Revision History Table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{6em} | X | P{9em} |}
+        \hline
+        \textbf{Version} & \textbf{Description} & \textbf{Date} \\
+        \hline
+        1.0 & First release of Software Design Document. & 9 December 2022 \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:revision}Revision History}
+}
+\end{table}
+
