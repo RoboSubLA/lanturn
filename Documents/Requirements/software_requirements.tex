@@ -37,72 +37,7 @@
 %-------------------------------------------------------------------------------
 %	TITLE PAGE
 %-------------------------------------------------------------------------------
-% Suppresses page number on the title page
-% Subsequent page starts page count at 1
-\begin{titlepage} 
-
-    % Defines a new command for horizontal lines, change thickness here
-	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
-	\center % Center everything on the page
-
-	%------------------------------------------------
-	%	Main Heading
-	%------------------------------------------------
-    % Main heading
-	\textsc{\LARGE California State University, Los Angeles}\\[1.5cm] 
-
-	%------------------------------------------------
-	%	Title
-	%------------------------------------------------
-	\HRule\\[0.4cm]
-    % Title
-    {\huge\bfseries Software Requirements Document}\\[0.4cm] 
-	\HRule\\[1.5cm]
-
-	%------------------------------------------------
-	%	Logo
-	%------------------------------------------------
-	\vfill\vfill
-    % Include a department/university logo
-	\includegraphics[width=0.5\textwidth]{../robosub_logo.png}\\[1cm] 
-
-	%------------------------------------------------
-	%	Major Heading
-	%------------------------------------------------
-    % Major heading
-	\textsc{\Large RoboSub}\\[0.5cm] 
-    % Minor heading
-	% \textsc{\large }\\[0.5cm] 
-
-	%------------------------------------------------
-	%	Author(s)
-	%------------------------------------------------
-	{\large\textit{Members}}\\
-	Thomas \textsc{Benson},
-	David \textsc{Camacho},
-	Bailey \textsc{Canham},
-	Brandon \textsc{Cao},\\
-	Roberto \textsc{Hernandez},
-	Andrew \textsc{Heusser},
-    Hector \textsc{Mora-Silva},\\
-	Bart \textsc{Rando},
-	Victor \textsc{Solis}
-
-	%------------------------------------------------
-	%	Date
-	%------------------------------------------------
-    % Position the date 3/4 down the remaining page
-	\vfill\vfill\vfill 
-    % Date
-	{\large\today} 
-
-	%---------------------------------------------------------------------------
-    % Push the date up 1/4 of the remaining page
-	\vfill 
-
-\end{titlepage}
-
-%-------------------------------------------------------------------------------
+\input{Contents/00_title_page.tex}
 
 %-------------------------------------------------------------------------------
 % Table of Contents
@@ -112,149 +47,28 @@
 \label{sec:toc}
 \addcontentsline{toc}{section}{\nameref{sec:toc}}
 \newpage
-%-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
 % Revision History
 %-------------------------------------------------------------------------------
-
-\section*{Revision History}
-\label{sec:revision}
-\addcontentsline{toc}{section}{\nameref{sec:revision}}
-
-% define column types
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
-
-% define table
-\begin{table}[htbp]
-{
-    \renewcommand{\arraystretch}{1.5} % Row spacing
-    \begin{tabularx}{\textwidth}{| P{6em} | X | P{9em} |}
-        \hline
-        \textbf{Version}    & \textbf{Changes}      & \textbf{Date} \\
-        \hline
-        1.0     & First release of Software Requirements Document. & 9 December 2022 \\ 
-        \hline
-    \end{tabularx}
-    \caption{\label{tab:revision}Revision History}
-}
-\end{table}
-
+\input{Contents/00_revision_history.tex}
 \newpage
 
 %-------------------------------------------------------------------------------
 % Content
 %-------------------------------------------------------------------------------
+\input{Contents/01_introduction.tex}
 
-\section{Introduction}
-\label{sec:introduction}
-
-\subsection{Purpose}
-\label{sec:purpose}
-
-\subsection{Intended Audience and Reading Suggestions}
-\label{sec:audience}
-
-\subsection{Product Scope}
-\label{sec:scope}
-
-\subsection{Definitions, Acronyms, and Abbreviations}
-\label{sec:definitions}
-
-\subsection{References}
-\label{sec:references}
-
-\section{Overall Description}
-\label{sec:overall}
-
-\subsection{System Analysis}
-\label{sec:analysis}
-
-\subsection{Product Perspective}
-\label{sec:perspective}
-
-\subsection{Product Functions}
-\label{sec:functions}
-
-\subsection{User Classes and Characteristics}
-\label{sec:classes}
-
-\subsection{Operating Environment}
-\label{sec:environment}
-
-\subsection{Design and Implementation Constraints}
-\label{sec:constraints}
-
-\subsection{User Documentation}
-\label{sec:documentation}
-
-\subsection{Assumptions and Dependencies}
-\label{sec:assumptions}
-
-\subsection{Apportionment of Requirements}
-\label{sec:apportionment}
+\input{Contents/02_overall_description.tex}
 
 \newpage % ---------------------------------------------------------------
-\section{External Interface Requirements}
-\label{sec:external}
+\input{Contents/03_external_interface_requirements.tex}
 
-\subsection{User Interfaces}
-\label{sec:user}
+\input{Contents/04_requirements_specification.tex}
 
-\subsection{Hardware Interfaces}
-\label{sec:hardware}
+\input{Contents/05_other_non_functional_requirements.tex}
 
-\subsection{Software Interfaces}
-\label{sec:software}
-
-\subsection{Communications Interfaces}
-\label{sec:communications}
-
-\section{Requirements Specification}
-\label{sec:specification}
-
-\subsection{Functional Requirements}
-\label{sec:functional}
-
-\subsection{External Interface Requirements}
-\label{sec:external-interface}
-
-\subsection{Logical Data Requirements}
-\label{sec:logical}
-
-\subsection{Design Constraints}
-\label{sec:constraints}
-
-\section{Other Non-Functional Requirements}
-\label{sec:non-functional}
-
-\subsection{Performance Requirements}
-\label{sec:performance}
-
-\subsection{Safety Requirements}
-\label{sec:safety}
-
-\subsection{Security Requirements}
-\label{sec:security}
-
-\subsection{Software Quality Attributes}
-\label{sec:quality}
-
-\subsection{Business Rules}
-\label{sec:business}
-
-\section{Appendices}
-\label{sec:appendices}
-
-\subsection{Appendix A: Glossary}
-\label{sec:glossary}
-
-\subsection{Appendix B: Analysis Models}
-\label{sec:analysis}
-
-\subsection{Appendix C: To Be Determined}
-\label{sec:tbd}
-
+\input{Contents/06_appendices.tex}
 
 %-------------------------------------------------------------------------------
 \end{document}

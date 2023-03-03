@@ -35,74 +35,9 @@
 \begin{document}
 
 %-------------------------------------------------------------------------------
-%	TITLE PAGE
+% Title Page
 %-------------------------------------------------------------------------------
-% Suppresses page number on the title page
-% Subsequent page starts page count at 1
-\begin{titlepage} 
-
-    % Defines a new command for horizontal lines, change thickness here
-	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
-	\center % Center everything on the page
-
-	%------------------------------------------------
-	%	Main Heading
-	%------------------------------------------------
-    % Main heading
-	\textsc{\LARGE California State University, Los Angeles}\\[1.5cm] 
-
-	%------------------------------------------------
-	%	Title
-	%------------------------------------------------
-	\HRule\\[0.4cm]
-    % Title
-    {\huge\bfseries Software Design Document}\\[0.4cm] 
-	\HRule\\[1.5cm]
-
-	%------------------------------------------------
-	%	Logo
-	%------------------------------------------------
-	\vfill\vfill
-    % Include a department/university logo
-	\includegraphics[width=0.5\textwidth]{../robosub_logo.png}\\[1cm] 
-
-	%------------------------------------------------
-	%	Major Heading
-	%------------------------------------------------
-    % Major heading
-	\textsc{\Large RoboSub}\\[0.5cm] 
-    % Minor heading
-	% \textsc{\large }\\[0.5cm] 
-
-	%------------------------------------------------
-	%	Author(s)
-	%------------------------------------------------
-	{\large\textit{Members}}\\
-	Thomas \textsc{Benson},
-	David \textsc{Camacho},
-	Bailey \textsc{Canham},
-	Brandon \textsc{Cao},\\
-	Roberto \textsc{Hernandez},
-	Andrew \textsc{Heusser},
-    Hector \textsc{Mora-Silva},\\
-	Bart \textsc{Rando},
-	Victor \textsc{Solis}
-
-	%------------------------------------------------
-	%	Date
-	%------------------------------------------------
-    % Position the date 3/4 down the remaining page
-	\vfill\vfill\vfill 
-    % Date
-	{\large\today} 
-
-	%---------------------------------------------------------------------------
-    % Push the date up 1/4 of the remaining page
-	\vfill 
-
-\end{titlepage}
-
-%-------------------------------------------------------------------------------
+\input{Contents/00_title_page.tex}
 
 %-------------------------------------------------------------------------------
 % Table of Contents
@@ -112,185 +47,40 @@
 \label{toc}
 \addcontentsline{toc}{section}{\nameref{toc}}
 \newpage
-%-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
 % Revision History
 %-------------------------------------------------------------------------------
-\section*{Revision History}
-\label{sec:revision}
-\addcontentsline{toc}{section}{\nameref{sec:revision}}
-
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
-
-% Revision History Table
-\begin{table}[htbp]
-{
-    \renewcommand{\arraystretch}{1.5} % Row spacing
-    \begin{tabularx}{\textwidth}{| P{6em} | X | P{9em} |}
-        \hline
-        \textbf{Version} & \textbf{Description} & \textbf{Date} \\
-        \hline
-        1.0 & First release of Software Design Document. & 9 December 2022 \\
-        \hline
-    \end{tabularx}
-    \caption{\label{tab:revision}Revision History}
-}
-\end{table}
-
+\input{Contents/00_revision_history.tex}
 \newpage
 
 %-------------------------------------------------------------------------------
 % Content
 %-------------------------------------------------------------------------------
+\input{Contents/01_introduction.tex}
 
-\section{Introduction}
-\label{sec:introduction}
+\input{Contents/02_design_considerations.tex}
 
-\subsection{Purpose}
-\label{sec:purpose}
+\input{Contents/03_architectural_representation.tex}
 
-\subsection{Document Conventions}
-\label{sec:conventions}
+\input{Contents/04_system_architecture.tex}
 
-\subsection{Intended Audience and Reading Suggestions}
-\label{sec:audience}
-
-\subsection{System Overview}
-\label{sec:overview}
-
-\section{Design Considerations}
-\label{sec:design}
-
-\subsection{Assumptions and Dependencies}
-\label{sec:assumptions}
-
-\subsection{General Constraints}
-\label{sec:constraints}
-
-\subsection{Goals and Guidelines}
-\label{sec:goals}
-
-\subsection{Development Methodology}
-\label{sec:methodology}
-
-\section{Architectural Representation}
-\label{sec:representation}
-
-\section{System Architecture}
-\label{sec:architecture}
-
-\section{Policies and Tactics}
-\label{sec:policies}
-
-\subsection{Specific Product Used}
-\label{sec:specific}
-
-\subsection{Requirements Traceability}
-\label{sec:traceability}
-
-\subsection{Testing the Software}
-\label{sec:testing}
-
-\subsection{Engineering Trade-Offs}
-\label{sec:tradeoffs}
-
-\subsection{Guidelines and Convetions}
-\label{sec:guidelines}
-
-\subsection{Protocols}
-\label{sec:protocols}
-
-\subsection{Maintianing the Software}
-\label{sec:maintain}
-
-\subsection{Interfaces}
-\label{sec:interfaces}
-
-\subsection{System Deliverables}
-\label{sec:deliverables}
-
-\subsection{Abstractions}
-\label{sec:abstractions}
+\input{Contents/05_policies_and_tactics.tex}
 
 \newpage % ---------------------------------------------------------------
-\section{Detailed System Design}
-\label{sec:detailed}
+\input{Contents/06_detailed_system_design.tex}
 
-\subsection{Name of Module}
-\label{sec:module}
+\input{Contents/07_detailed_lower_level_component_design.tex}
 
-\subsubsection{Responsibilities}
-\label{sec:responsibilities}
+\input{Contents/08_user_interface.tex}
 
-\subsubsection{Contraints}
-\label{sec:constraints}
+\input{Contents/09_database_design.tex}
 
-\subsubsection{User Interactions}
-\label{sec:interactions}
+\input{Contents/10_requirements_validation_and_verification.tex}
 
-\subsubsection{Resources}
-\label{sec:resources}
+\input{Contents/11_glossary.tex}
 
-\subsubsection{Interface/Exports}
-\label{sec:exports}
-
-\section{Detailed Lower Level Component Design}
-\label{sec:lower}
-
-\subsection{Name of Class or File}
-\label{sec:class}
-
-\subsubsection{Classifications}
-\label{sec:classifications}
-
-\subsubsection{Processing Narrative(PSPEC)}
-\label{sec:pspec}
-
-\subsubsection{Interface Description}
-\label{sec:interface}
-
-\subsubsection{Processing Details}
-\label{sec:details}
-
-\subsubsection{Design Class Heirarchy}
-\label{sec:heirarchy}
-
-\subsubsection{Restrictions/Limitations}
-\label{sec:restrictions}
-
-\subsubsection{Performance Issues}
-\label{sec:performance}
-
-\subsubsection{Design Contraints}
-\label{sec:designconstraints}
-
-\subsubsection{Processing Detail For Each Operation}
-\label{sec:operation}
-
-\section{User Interface}
-\label{sec:userinterface}
-
-\subsection{Overview of User Interface}
-\label{sec:overviewui}
-
-\subsection{Screen Frameworks or Images}
-\label{sec:frameworks}
-
-\subsection{User Interface Flow Diagrams}
-\label{sec:flowdiagrams}
-
-\section{Database Design}
-\label{sec:database}
-
-\section{Requirements Validation and Verification}
-\label{sec:validation}
-
-\section{Glossary}
-\label{sec:glossary}
-
-\section{References}
-\label{sec:references}
+\input{Contents/12_references.tex}
 
 %-------------------------------------------------------------------------------
 \end{document}
