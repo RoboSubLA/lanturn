@@ -1,15 +1,96 @@
+% ------------------------------------------------------------------------------
+% Design Considerations
+% ------------------------------------------------------------------------------
 \section{Design Considerations}
 \label{sec:design}
 
+This section describes many of the issues which need to be addressed or
+resolved before attempting to devise a complete design solution.
+\par
+
+% ------------------------------------------------------------------------------
+% Assumptions and Dependencies
+% ------------------------------------------------------------------------------
 \subsection{Assumptions and Dependencies}
 \label{sec:assumptions}
 
+Lanturn will have a TX2 module, a small form-factor embedded computing device,
+for its main computer. The TX2 module comes flashed with Ubuntu 18.04 and comes
+packaged with Jetpack 4.6.1, a set of libraries designed for AI computations
+designed for the TX2 module.  
+\par
+
+Over the Operating System base and the Kernel overlay will be ROS2 Foxy, a
+piece of middleware that sets an environment for the different processes that
+will run on Lanturn. 
+\par
+
+The second computing device that will exist in the Lanturn system is a
+microcontroller, a teensy 4.1. The microcontroller will be used to interface
+with the onboard sensors, motors, and actuators.
+\par
+
+% ------------------------------------------------------------------------------
+% General Constraints
+% ------------------------------------------------------------------------------
 \subsection{General Constraints}
 \label{sec:constraints}
 
+Ubuntu is the only operating system that can run on the TX2 module. This
+requires any drivers or other implemented interfaces to be designed for, or to
+be compatible with Ubuntu versions. 
+\par
+
+The TX2 module and its accompanying software is designed for Ubuntu 18.04. Even
+though it is designed for Ubuntu version 18.04, it is possible to upgrade to a
+later Ubuntu version; however, the only Ubuntu version which is officially
+supported is Ubuntu 18.04. The Ubuntu version the TX2 will be running on is
+Ubuntu 20.04 Focal; all constraints that come with running on an unsupported
+version of Ubuntu on the TX2 module will exist in this project. 
+\par
+
+The middleware running on top of Ubuntu is a ROS2 version, ROS2 Foxy, which
+runs on Ubuntu 20.04. ROS2 Foxy comes with restrictions with the programming
+languages that can be used. The API that is used for development are rclcpp
+(C++ library) and rclpy (Python library). 
+\par
+
+The second computing device, Teensy 4.1, must be programmed in C++ using one
+of: teensyduino with Arduino IDE or platformio for Visual Studio Code.
+\par
+
+% ------------------------------------------------------------------------------
+% Goals and Guidelines
+% ------------------------------------------------------------------------------
 \subsection{Goals and Guidelines}
 \label{sec:goals}
 
+This document will have the following goals and guidelines in mind: 
+
+\begin{itemize}
+    \item The Lanturn project must have a functioning autonomous system that
+        can execute competition tasks by July 2023.
+    \item All code written for this project should be documented. 
+    \item Programs written for this project should be refactored periodically
+        to improve efficiency.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Development Methodology
+% ------------------------------------------------------------------------------
 \subsection{Development Methodology}
 \label{sec:methodology}
+
+The software team will be broken down into 5 sub-teams, each responsible for
+one module of the software system. Each week, the sub-teams show progress made
+and communicate any difficulties that have come across. 
+\par
+
+As sub-teams gain deeper understanding of their module, they will communicate
+to the other modules what data they can provide and what data they cannot. 
+\par
+
+This system will ensure that none of the modules depend on each other and can
+be switched out, if need be, in future versions of Lanturn.
+\par
 

@@ -1,15 +1,72 @@
+% ------------------------------------------------------------------------------
+% Introduction
+% ------------------------------------------------------------------------------
 \section{Introduction}
 \label{sec:introduction}
 
+% ------------------------------------------------------------------------------
+% Purpose
+% ------------------------------------------------------------------------------
 \subsection{Purpose}
 \label{sec:purpose}
 
+This document represents the software component of Lanturn, an Autonomous
+Underwater Vehicle made by the Robosub Senior Design Software and
+Hardware/Electrical teams. This will break down into further sub teams which
+put together make up the entire RoboSub Senior Design Software Team. These sub
+teams include Autonomy, Computer Vision, Controls, and Navigation. Some modules
+used for software include: the ROS module and the Arduino module.
+\par
+
+% ------------------------------------------------------------------------------
+% Document Conventions
+% ------------------------------------------------------------------------------
 \subsection{Document Conventions}
 \label{sec:conventions}
 
+The standards/conventions that were used to write this document are very common
+formatting such as bold headings, highlighted words that are important, and
+smaller fonts for paragraphs.
+\par
+
+% ------------------------------------------------------------------------------
+% Intended Audience and Reading Suggestions
+% ------------------------------------------------------------------------------
 \subsection{Intended Audience and Reading Suggestions}
 \label{sec:audience}
 
+The types of readers that this document is intended for are future developers
+of the RoboSub Senior Design years, developers who are interested in robotics,
+and hobbyists.  This document will cover the four different sub teams that make
+up the RoboSub Senior Design Team working on Lanturn: Autonomy, Computer
+Vision, Controls, and Navigation. 
+\par
+
+Autonomy covers state machines, Computer Vision covers machine learning and
+image processing, Controls covers movement and IMU readings, Navigation covers
+sensor readings and mapping/localization.
+\par
+
+% ------------------------------------------------------------------------------
+% System Overview
+% ------------------------------------------------------------------------------
 \subsection{System Overview}
 \label{sec:overview}
+The Autonomy/Mission Planning sub team is to cover the SMACH model developed to
+control the AUV subsystems through each task at the RoboNation Competition.  
+\par
 
+The Computer Vision sub team is to recognize specific images, such as badges or
+dollar signs, in underwater environments and then process them through a
+machine learning model and send the relevant data to Autonomy/Mission Planning. 
+\par
+
+The Controls sub team is to control Lanturn, the sub, with its thrusters using
+PID controllers. This is done using three different axes: Pitch to tilt forward
+or backward, roll to move side to side, and Yaw to rotate left or right.  
+\par
+
+The Navigation sub team is to gather data from the sensors such as barometer
+and then also send relevant data to Autonomy/Mission Planning. 
+\par
+ 
