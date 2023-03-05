@@ -10,11 +10,23 @@
 \subsection{Performance Requirements}
 \label{sec:performance}
 
+The software on Lanturn should have as small of a footprint as possible to
+minimize power consumption and allow for longer running times.
+\par
+
 % ------------------------------------------------------------------------------
 % Safety Requirements
 % ------------------------------------------------------------------------------
 \subsection{Safety Requirements}
 \label{sec:safety}
+
+\begin{itemize}
+    \item Software kill switch 
+    \item Software run switch 
+    \item Must always be supervised 
+    \item Safety checks should be done before Lanturn enters the water 
+    \item PID values must reset every time kill switch is deactivated
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Security Requirements
@@ -22,15 +34,29 @@
 \subsection{Security Requirements}
 \label{sec:security}
 
+Not Applicable.
+\par
+
 % ------------------------------------------------------------------------------
 % Software Quality Attributes
 % ------------------------------------------------------------------------------
 \subsection{Software Quality Attributes}
 \label{sec:quality}
 
+\begin{itemize}
+    \item The software will be designed in a modular way; this ensures reliability of modules even when one or more modules can no longer be used. 
+    \item There will be a global watchdog service 
+    \item Each module will periodically send a heartbeat to global watchdog service 
+    \item There will be a local watchdog service in each module 
+    \item Each component in a module will periodically send a heartbeat to local watchdog service
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 % Business Rules
 % ------------------------------------------------------------------------------
 \subsection{Business Rules}
 \label{sec:business}
+
+Not applicable.
+\par
 

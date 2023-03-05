@@ -1,12 +1,100 @@
+%-------------------------------------------------------------------------------
+% Appendixes
+%-------------------------------------------------------------------------------
 \section{Appendices}
 \label{sec:appendices}
 
+%-------------------------------------------------------------------------------
+% Appendix A: Glossary
+%-------------------------------------------------------------------------------
 \subsection{Appendix A: Glossary}
 \label{sec:glossary}
 
+% define column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Horizontal Cell Padding
+
+% define table
+\begin{table}[h]
+{
+    \renewcommand{\arraystretch}{1.5} % Vertical Cell Padding
+    \begin{tabularx}{\textwidth}{| P{6em} | X |}
+        \hline
+        \textbf{Terms}      & \textbf{Definitions} \\
+        \hline
+        SRS     & Software Requirements Specification \\
+        \hline
+        SDD     & Software Design Document \\
+        \hline
+        RoboSub &An annual competition for robotic submarines developed by students \\
+        \hline
+        RoboNation & The organization which hosts the RoboSub competition \\
+        \hline
+        CS      & Computer Science \\
+        \hline
+        ME      & Mechanical Engineer \\
+        \hline
+        EE      & Electrical Engineer \\
+        \hline
+        AUV     & Autonomous Underwater Vehicle \\
+        \hline
+        Lanturn & The AUV inherited by the 2023 Senior Design team \\
+        \hline
+        UM ERC  &University of Maryland Eppley Recreation Center \\
+        \hline
+        TRANSDEC & The Transducer Evaluation Center  \\
+        \hline
+        Mission Handbook & The Document containing rules and regulations for the RoboSub competition \\
+        \hline
+        GUI     & Graphical User Interface \\
+        \hline
+        ROS     & Robot Operating System \\
+        \hline
+        RQT     & ROS QT, software framework for ROS GUI applications \\
+        \hline
+        Rviz    & A 3D visualization tool for ROS systems \\
+        \hline
+        CLI     & Command Line Interface\\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:glossary} Glossary of Terms}
+}
+\end{table}
+
+
+%-------------------------------------------------------------------------------
+% Appendix B: Analysis Models
+%-------------------------------------------------------------------------------
 \subsection{Appendix B: Analysis Models}
 \label{sec:analysis}
 
+%-------------------------------------------------------------------------------
+% Appendix C: To Be Determined
+%-------------------------------------------------------------------------------
 \subsection{Appendix C: To Be Determined}
 \label{sec:tbd}
+
+Things to be determined.
+
+%-------------------------------------------------------------------------------
+% Possible User Interfaces
+%-------------------------------------------------------------------------------
+\subsubsection*{Possible User Interfaces}
+\label{sec:possible_user_interfaces}
+\begin{itemize}
+        \item Control Center 
+        \item Autonomy Evaluation Center 
+        \item Paper: https://ieeexplore.ieee.org/abstract/document/8324487 
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% Performance Requirements
+%-------------------------------------------------------------------------------
+\subsubsection*{Performance Requirements}
+\label{sec:performance_requirements}
+    \begin{itemize}
+        \item Autonomy Module will not use more than XX processing power 
+        \item Computer Vision Module will not use more than XX processing power 
+        \item Mapping Module will not use more than XX processing power 
+        \item Localization Module will not use more than XX processing power
+    \end{itemize}
 
