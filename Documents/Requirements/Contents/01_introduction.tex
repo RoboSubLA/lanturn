@@ -1,18 +1,165 @@
+% -----------------------------------------------------------------------------
+% Purpose
+% -----------------------------------------------------------------------------
 \section{Introduction}
 \label{sec:introduction}
 
+The computer science senior design team for RoboSub will work in conjunction
+with another team of 10 consisting of undergraduates from the Mechanical and
+Electrical Department of California State University, Los Angeles. The goal of
+the two teams is to design, manufacture and program an AUV (Autonomous
+Underwater Vehicle) to compete in the annual RoboSub [2] competition hosted by
+RoboNation \cite{robonation_2022}.
+\par
+
+There are common requirements across previous RoboSub competitions; these
+requirements include: autonomous navigation, movement, object detection, object
+classification, and object manipulation. 
+\par
+
+This year, the RoboSub senior design team inherited the design of the previous
+year’s senior design team. They started the mechanical, electrical and software
+design for the Autonomous Underwater Vehicle: Lanturn. The RoboSub Computer
+Science team will work with the Mechanical and Electrical Senior Design team to
+finish the work done by the previous year. 
+\par
+
+This document will give an overview to both users and developers of the
+expected behavior and software requirements for Lanturn.
+\par
+
+% -----------------------------------------------------------------------------
+% Purpose 
+% -----------------------------------------------------------------------------
 \subsection{Purpose}
 \label{sec:purpose}
+\subsubsection{Purpose of the Document}
 
+This document will list the software requirements imposed by RoboNation in the
+2023 RoboSub competition and any self-imposed requirements. Self-imposed
+requirements might include requirements for development, design improvements,
+system modularity, or quality of life improvements.
+\par
+
+\begin{itemize}
+    \item Section 3 will give requirements for setting up an external interface 
+    \item Section 2 will give an overall description of the requirements 
+    \item Section 4 will explicitly define specific requirements 
+    \item Section 5 will define non-functional requirements 
+    \item Section 6 will define any other requirement that does not fit in any other section 
+\end{itemize}
+
+\subsubsection{Purpose of the Product}
+
+The product being developed is software for the Autonomous Underwater Vehicle,
+Lanturn. Lanturn is to compete in the 2023 RoboSub competition hosted by
+RoboNation. The RoboSub 2022 competition was hosted at The University of
+Maryland in their Olympic pool. Other years, the competition is hosted at the
+TRANSDEC center in San Diego. Since the competition for 2022 was a success in
+the University of Maryland, a similar environment is expected for the 2023
+competition. 
+\par
+
+Lanturn should be able to autonomously navigate and execute tasks within a
+course. The layout of the course and a description of the tasks is published by
+RoboNation by the end of March of the year of the competition. For now, the
+software requirements and assumptions on what tasks Lanturn will need to do
+will be based on the 2022 Mission Handbook.
+\par
+
+% ------------------------------------------------------------------------------
+% Audience
+% ------------------------------------------------------------------------------
 \subsection{Intended Audience and Reading Suggestions}
 \label{sec:audience}
 
+This software document is intended for users, developers, documentation writers
+and testers. 
+
+\begin{itemize}
+    \item Documentation Writers 
+        \begin{itemize}
+            \item The 2022 RoboSub Team Handbook 
+            \item section 4 to understand the requirements of the system and what documentation might exist in other places 
+            \item if they are responsible for document one software submodule, they can read their own section 
+            \item section 5 for requirements that do not fit in other categories
+        \end{itemize}
+
+    \item Developers 
+        \begin{itemize}
+            \item The RoboSub Software Design Document 
+            \item The appropriate README in the git repository hosted on GitHub 
+            \item section 4 to get a complete understanding of the complete system (even if they are only responsible for one software module) 
+            \item section 5 to get an understanding of restrictions they should keep in mind while developing the software
+        \end{itemize}
+
+    \item Users 
+        \begin{itemize}
+            \item The 2022 RoboSub Team Handbook 
+            \item section 3 to understand what is required to interface with Lanturn 
+        \end{itemize}
+
+    \item Testers 
+        \begin{itemize}
+            \item The 2022 RoboSub Team Handbook 
+            \item section 3 to understand what is required to interface with Lanturn
+            \item section 4 to understand the functionality that needs to be tested
+        \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Scope
+% ------------------------------------------------------------------------------
 \subsection{Product Scope}
 \label{sec:scope}
+The goal of the software for Lanturn is to autonomously accomplish tasks at the
+RoboSub competition. 
+\par
 
+To accomplish the set goal, the software will have five modules: 
+\begin{enumerate}
+    \item Autonomy
+        \begin{itemize}
+            \item Navigation 
+            \item Decision making 
+        \end{itemize}
+
+    \item Computer Vision 
+        \begin{itemize}
+            \item Object detection 
+            \item Object classification
+        \end{itemize}
+
+    \item Controls 
+        \begin{itemize}
+            \item Sensor data acquisition 
+            \item Actuator control
+        \end{itemize}
+
+    \item Mapping 
+        \begin{itemize}
+            \item Environment mapping 
+        \end{itemize}
+
+    \item Localization 
+        \begin{itemize}
+            \item Vehicle localization in map
+        \end{itemize}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% Definitions, Acronyms, and Abbreviations
+% ------------------------------------------------------------------------------
 \subsection{Definitions, Acronyms, and Abbreviations}
 \label{sec:definitions}
 
+A list of Definition, Acronyms, and Abbreviations can be found at the end of
+this document in Appendix A: Glossary.
+\par
+
+% ------------------------------------------------------------------------------
+% References
+% ------------------------------------------------------------------------------
 \subsection{References}
 \label{sec:references}
 

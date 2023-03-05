@@ -1,15 +1,123 @@
+% ------------------------------------------------------------------------------
+% External Interface Requirements
+% ------------------------------------------------------------------------------
 \section{External Interface Requirements}
 \label{sec:external}
 
+This software does not currently have any custom interfaces, but there are
+interfaces provided by ROS2 which can be used to configure or control the
+submarine in real time.
+\par
+
+% ------------------------------------------------------------------------------
+% User Interfaces
+% ------------------------------------------------------------------------------
 \subsection{User Interfaces}
 \label{sec:user}
 
+Currently, there are not any graphical user interfaces designed for interfacing
+with Lanturn. However, ROS provides a general way of interfacing and
+interpreting data from a ROS system. 
+\par
+
+\subsubsection*{RQT}
+\label{sec:rqt}
+
+RQT is a software framework for creating graphical user interfaces with the
+running ROS system. It behaves like a module within the ROS system and comes
+with implementation of common functionality in the form of plugins.
+\par
+
+Above is a sample configuration of several plugins that might be useful to have
+when interpreting data from Lanturn’s ROS system. 
+\par
+
+Of note is the drop-down menus at the top left. The drop-down menu shown when
+selecting “Plugins” gives a list of plugins to open. Once a plugin is selected,
+it will open in the RQT window and then can be dragged around to reconfigure
+the layout of the plugins. 
+\par
+
+More information can be found on their website http://wiki.ros.org/rqt.
+\par
+
+\subsubsection*{RVIZ}
+\label{sec:rviz}
+
+Rviz is a 3D visualization tool for ROS that can be used to visualize aspects
+of a robot model. It provides different panels that can help you visualize
+position, orientation and camera data in the running ROS system.
+\par
+
+More information can be found on their website http://wiki.ros.org/rviz.
+\par
+
+% ------------------------------------------------------------------------------
+% Hardware Interfaces
+% ------------------------------------------------------------------------------
 \subsection{Hardware Interfaces}
 \label{sec:hardware}
 
+\subsubsection*{Fathon-X}
+\label{sec:fathon-x}
+
+Although Lanturn is meant to be entirely autonomous, it is beneficial to be
+able to connect to the ROS system while testing new components for fast testing
+and real-time development. 
+\par
+
+Lanturn will have a Fathom-X, an interface board sold by Blue Robotics, onboard
+that can be used to establish a connection to an external computer. To
+establish the connection, two of the Fathom-X boards are required: one onboard
+Lanturn and the other connected to the external computer through an Ethernet
+port.
+\par
+
+\textbf{Fathon-X Features}
+\begin{itemize}
+    \item 80 Mbps Ethernet over two wires (per our own bandwidth testing) 
+    \item 300m+ tether length capability 
+    \item Plug-and-play with no setup involved 
+    \item Onboard switching power supply with 7-28V input range 
+    \item USB Mini-B connector for powering directly from a computer on the topside 
+    \item Indicator LEDs for power, link, and data 
+    \item Included 6" Ethernet cable for connection to onboard computer
+\end{itemize}
+
+More on the Blue Robotics website:
+https://bluerobotics.com/store/comm-control-power/tether-interface/fathom-x-tether-interface-board-set-copy/
+\par
+
+\textbf{Fathom ROV Tether}
+The Fathom ROV Tether is another product from Blue Robotics and can be
+connected to one of the penetrators on Lanturn to host the connection between
+the two Fathom-X Boards.
+\par
+
+% ------------------------------------------------------------------------------
+% Software Interfaces
+% ------------------------------------------------------------------------------
 \subsection{Software Interfaces}
 \label{sec:software}
 
+The external computer that is connected through the Tether should be running on
+the same software as Lanturn. 
+
+\begin{itemize}
+    \item Ubuntu 20.04 
+        \begin{itemize}
+            \item ROS2 Foxy (Middleware) 
+            \item OpenSSH
+        \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Communications Interfaces
+% ------------------------------------------------------------------------------
 \subsection{Communications Interfaces}
 \label{sec:communications}
+
+The external computer will use OpenSSH to establish an SSH connection with
+Lanturn and will use the same Message Passing interfaces as the ROS system in
+Lanturn (i.e., ROS CLI tools and ROS APIs).
 

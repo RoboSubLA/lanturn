@@ -13,6 +13,7 @@
 \usepackage{geometry}       % Required for margins
 \usepackage{graphicx}       % Required for adding images
 \usepackage{hyperref}       % Required for adding hyperlinks
+\usepackage{parskip}        % Required for paragraph spacing
 \usepackage{tabularx}       % Required for easier to manage tables
 
 
@@ -61,7 +62,6 @@
 
 \input{Contents/02_overall_description.tex}
 
-\newpage % ---------------------------------------------------------------
 \input{Contents/03_external_interface_requirements.tex}
 
 \input{Contents/04_requirements_specification.tex}
@@ -70,5 +70,7 @@
 
 \input{Contents/06_appendices.tex}
 
+\bibliographystyle{plain}
+\bibliography{../references}
 %-------------------------------------------------------------------------------
 \end{document}

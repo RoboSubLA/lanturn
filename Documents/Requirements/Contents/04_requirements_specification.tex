@@ -1,15 +1,225 @@
+% ------------------------------------------------------------------------------
+% Requirements Specification
+% ------------------------------------------------------------------------------
 \section{Requirements Specification}
 \label{sec:specification}
 
+This section contains all the necessary software requirements with enough
+detail to allow designers to accurately design the software to satisfy those
+requirements, and to allow testers of the software to verify that all
+requirements have been satisfied.
+\par
+
+% ------------------------------------------------------------------------------
+% Functional Requirements
+% ------------------------------------------------------------------------------
 \subsection{Functional Requirements}
 \label{sec:functional}
 
+There will be six modules that will be implemented; each with a different set
+of related requirements. 
+\par
+
+The six modules that will be implemented will be: 
+
+\begin{enumerate}
+    \item Autonomy 
+    \item Computer Vision 
+    \item Controls 
+    \item Localization 
+    \item Mapping 
+    \item Watchdog 
+\end{enumerate}
+
+These are the following responsibilities of each sub-module:
+
+\begin{enumerate}
+    \item Autonomy 
+        \begin{enumerate}
+            \item The autonomy module shall manage time in a run through the course  
+            \item The autonomy module shall send current state to system logs  
+            \item The autonomy module shall read and interpret mapping data 
+            \item The autonomy module shall read and interpret localization data 
+            \item The autonomy module shall read and filter computer vision data 
+            \item The autonomy module shall send command to control claw 
+            \item The autonomy module shall send command to shoot torpedoes 
+            \item The autonomy module shall send command to release dropper 
+            \item The autonomy module shall send a heartbeat to the watchdog service 
+            \item The autonomy module shall know the task being executed 
+            \item The autonomy module shall autonomously navigate map 
+            \item The autonomy module shall position submarine in a desired position 
+            \item  The autonomy module shall orient submarine in a desired orientation 
+            \item The autonomy module shall be able to center with objects 
+        \end{enumerate}
+
+    \item Computer Vision 
+        \begin{enumerate}
+            \item The Computer Vision shall send a heartbeat to the watchdog service  
+            \item The Computer Vision shall publish raw images from front camera 
+            \item The Computer Vision shall publish raw images from bottom camera  
+            \item The Computer Vision shall receive images from front camera 
+            \item The Computer Vision shall receive images from bottom camera 
+            \item The Computer Vision shall detect and classify all task objects  
+            \item The Computer Vision shall publish bounding boxes of objects 
+            \item The Computer Vision shall provide distance from objects 
+            \item The Computer Vision shall calculate angle of incidence of objects
+        \end{enumerate}
+
+    \item Control 
+        \begin{enumerate}
+            \item The Controls shall send a heartbeat to the watchdog service  
+            \item The Controls shall read and publish data from Bar30 barometer 
+            \item The Controls shall read and publish data from Sonar 
+            \item The Controls shall implement a PID Library 
+            \item The Controls shall generate PWM values that will move submarine to a desired position and/or orientation 
+            \item The Controls shall output PWM values to thrusters 
+            \item The Controls shall clench and release a mechanical claw on command 
+            \item The Controls shall shoot torpedoes on command 
+            \item The Controls shall release ball from dropper on command 
+        \end{enumerate}
+
+    \item Mapping 
+        \begin{enumerate}
+            \item The mapping module shall send a heartbeat to the watchdog service  
+            \item The mapping module shall subscribe to all computer vision data 
+            \item The mapping module shall subscribe to Sonar data 
+            \item The mapping module shall implement a Kalman Filter 
+            \item The mapping module shall generate a map of environment 
+            \item The mapping module shall position all task objects in map 
+            \item The mapping module shall publish map
+        \end{enumerate}
+
+    \item Localization 
+        \begin{enumerate}
+            \item The localization module shall send a heartbeat to the watchdog service  
+            \item The localization module shall subscribe to IMU data topic 
+            \item The localization module shall subscribe to Barometer data topic 
+            \item The localization module shall subscribe to both camera topics 
+            \item The localization module shall subscribe to DVL data topic 
+            \item The localization module shall subscribe to map topic 
+            \item The localization module shall position and orient submarine inside the map 
+            \item The localization module shall publish localization data
+        \end{enumerate}
+
+    \item Watchdog 
+        \begin{enumerate}
+            \item The watchdog module shall subscribe to all heartbeats from all modules 
+            \item The watchdog module shall shutdown submarine if major components fail 
+            \item The watchdog module may have fallback module configurations
+        \end{enumerate}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% External Interface Requirements
+% ------------------------------------------------------------------------------
 \subsection{External Interface Requirements}
 \label{sec:external-interface}
 
+There are no external interface requirements to interact with Lanturn, aside
+from those listed in section 3. However, it will benefit the user to be
+familiar with the messages that are passed between the ROS modules in Lanturn.
+\par
+
+% ------------------------------------------------------------------------------
+Logical Data Requirements
+% ------------------------------------------------------------------------------
 \subsection{Logical Data Requirements}
 \label{sec:logical}
 
+Not applicable.
+\par
+
+% ------------------------------------------------------------------------------
+% Design Constraints
+% ------------------------------------------------------------------------------
 \subsection{Design Constraints}
 \label{sec:constraints}
+
+The following are the design constraints for Lanturn:
+\begin{itemize}
+    \item Sensors
+        \begin{itemize}
+            \item Camera: Front and bottom
+                \begin{itemize}
+                    \item 1920x1080 resolution 
+                    \item 20-30 FPS
+                    \item 80 degree vertical field of view
+                    \item 120 degree horizontal field of view
+                \end{itemize}
+            \item Barometer
+            \item Doppler Velocity Log (DVL)
+            \item Sonar
+            \item Inertia Measurement Unit (IMU)
+        \end{itemize}
+    \item Actuators
+        \begin{itemize}
+            \item Thrusters
+            \item Claw
+            \item Torpedoes
+            \item Dropper
+            \item Transducer
+        \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% TX2 Module Specifications
+% ------------------------------------------------------------------------------
+\subsubsection*{TX2 Module Specifications}
+
+% define column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Horizontal Cell Padding
+
+% define table
+\begin{table}[h]
+{
+    \renewcommand{\arraystretch}{1.5} % Vertical Cell Padding
+    \begin{tabularx}{\textwidth}{| P{6em} | X |}
+        \hline
+        \textbf{Component}    & \textbf{Descriptions}\\
+        \hline
+        GPU     & 256-core NVIDIA Pascal GPU architecture wtih 256 NVIDIA CUDA cores\\
+        \hline
+        CPU     & Quad-core ARM Cortex-A57 MPCore processor with 64-bit architecture\\
+        \hline
+        Memory  & 8GB 64-bit LPDDR4 memory\\
+        \hline
+        Storage & 32GB eMMC 5.1 flash storage\\
+        \hline
+        Power   & 7.5/15 Watts power consumption\\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:tx2_specs} Specifications of the TX2 module}
+}
+\end{table}
+
+% ------------------------------------------------------------------------------
+% TX2 Development Kit Carrier Board Specifications
+% ------------------------------------------------------------------------------
+\subsubsection*{TX2 Development Kit Carrier Board Specifications}
+\label{sec:tx2_carrier_board_specs}
+
+The Jetson TX2 Developer Kit carrier board (P2597) includes [10]: 
+\begin{itemize}
+    \item Micro-USB to USB A cable
+    \item (2x) WLAN/Bluetooth antenna
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Teensy 4.1 Module Specifications
+% ------------------------------------------------------------------------------
+\subsubsection*{Teensy 4.1}
+\label{sec:teensy_4_1_specs}
+
+The pjrc website [7] which develops the Teensy 4.1 boards provides the following specifications: 
+\begin{itemize}
+    \item ARM Cortex-M7 at 600 MHz  
+    \item Float point math unit, 64 \& 32 bits  
+    \item 7936K Flash, 1024K RAM (512K tightly coupled), 4K EEPROM (emulated)  
+    \item QSPI memory expansion, locations for 2 extra RAM or Flash chips  
+    \item USB device 480 Mbit/sec \& USB host 480 Mbit/sec  
+    \item 55 digital input/output pins, 35 PWM output pins  
+    \item 18 analog input pins  
+    \item 8 serial, 3 SPI, 3 I2C ports  
+    \item Ethernet 10/100 Mbit with DP83825 PHY
+\end{itemize}
 
