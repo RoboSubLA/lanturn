@@ -16,17 +16,67 @@
 \subsubsection{Responsibilities}
 \label{sec:responsibilities}
 
+The main responsibility of autonomy is to design and implement the logic
+software of the AUV to complete each task of the competition, currently using
+SMACH and in the future BehaviorTree. In addition, autonomy is responsible for
+receiving and publishing data. Autonomy receives data from computer vision,
+localization, and mapping components. Based on the current state of the AUV, to
+maneuver throughout the competition, the data collected is then published to
+the control's component.
+\par
+
 % ------------------------------------------------------------------------------
 % Constraints
 % ------------------------------------------------------------------------------
 \subsubsection{Contraints}
 \label{sec:constraints}
+\begin{itemize}
+    \item Autonomy will be responsible for system checks prior to starting goal
+        search, and aborting mission if critical component failure occurs. 
+    \item Autonomy will run until either all goals at met, battery capacity
+        runs out or time limit exceeds 20 minutes.
+    \item Autonomy will assume all data published is correct, data is formatted
+        and validated prior to being published. 
+    \item Autonomy is responsible for completing tasks that lead to completing
+        each goal successfully, based on its current state and retry if it fails
+        the goal state and moving on to the next goal/state. 
+    \item Failure to complete tasks in a timely matter will result in SMACH
+        failing. 
+    \item SMACH is not meant to be used as a state machine for low-level
+        systems that require high efficiency, SMACH is a task-level
+        architecture.
+    \item SMACH is linear, performing one task at a time, unless it is designed
+        to run in concurrence
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Composition
+% ------------------------------------------------------------------------------
+\subsubsection{Composition}
+\label{sec:autonomy_composition}
+
+\begin{itemize}
+    \item ROS2: Robot Operating System V2 
+    \item SMACH: State Machine 
+    \item SMACH Viewer: State Machine graphical Viewer 
+    \item Behavior Tree: Goal oriented instead of state-based logic 
+    \item BehaviorTree.CPP: API for implementing Behavior Tree 
+    \item Groot: Graphical Interface for building Behavior Trees.
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % User Interactions
 % ------------------------------------------------------------------------------
 \subsubsection{User Interactions}
 \label{sec:interactions}
+\begin{itemize}
+    \item Define the current state of the AUV 
+    \item Subscribe to receive data from other components of the AUV 
+    \item Publish data to controls component of the AUV 
+    \item Define transition between sub-states of a state machine 
+    \item Define the transition between different state machines 
+    \item Pass user data between different state machines
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Resources
@@ -34,12 +84,37 @@
 \subsubsection{Resources}
 \label{sec:resources}
 
+\begin{itemize}
+    \item SMACH – A ROS-independent Python library to build hierarchical state
+        machines \url{http://wiki.ros.org/smach/Documentation}
+    \item SMACH Viewer – GUI that shows the state of hierarchical SMACH state
+        machines. \url{http://wiki.ros.org/smach_viewer#Documentation}
+    \item BehaviorTree.CPP - Implemented using C++, assembled using a scripting
+        language based on XML. Behavior Trees are composable. You can build
+        complex behaviors by reusing simpler ones.
+        \url{https://www.behaviortree.dev/}
+    \item Groot - "IDE for Behavior Trees". Allows users to visualize, create
+        and edit Behavior Trees, using a simple drag and drop interface and
+        lets Trees to be monitored in real-time.
+        \url{https://www.behaviortree.dev/groot}
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 % Interface/Exports
 % ------------------------------------------------------------------------------
 \subsubsection{Interface/Exports}
 \label{sec:exports}
 
+\begin{itemize}
+    \item Autonomy interfaces only through other systems that directly interact
+        with the hardware and doesn’t directly interface with any hardware.  
+    \item Autonomy shall interact with the user interface to provide the
+        current state of the AUV  
+    \item Autonomy interacts with all other components to receive data to
+        determine the current state of the AUV 
+    \item Autonomy interacts with controls to provide instructions to maneuver
+        the AUV
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Computer Vision Module
@@ -53,11 +128,33 @@
 \subsubsection{Responsibilities}
 \label{sec:responsibilities}
 
+The primary responsibility of the computer vision is to utilize the cameras
+attached to the RoboSub in order to identify various competition items. The
+computer vision program will then output a bounding box around the identified
+object and send that information to the navigation controls. The computer
+vision model should have a high enough accuracy to allow us to be confident in
+the result. Additionally, the program should output the distance and angle the
+robot is from the identified object and send this data to the navigation
+controls.
+\par
+
 % ------------------------------------------------------------------------------
 % Constraints
 % ------------------------------------------------------------------------------
 \subsubsection{Contraints}
 \label{sec:constraints}
+
+The main constraint on the computer vision model is time and storage. We must
+train the computer vision model on pictures of each object we want it to be
+able to identify. However, in order to do this, we must have hundreds of
+pictures available and saved for when we train the model. Therefore, we must
+consider how much storage we have available on the computer. Additionally,
+training the computer vision model takes quite a bit of time. In our first
+training session, we only got through around 500 iterations of training, and it
+took over 5 hours. Due to this, we must consider how much time we have and
+carefully plan it out in order to ensure we have enough time for the model to
+train enough to be reliable.
+\par
 
 % ------------------------------------------------------------------------------
 % User Interactions
@@ -66,10 +163,39 @@
 \label{sec:interactions}
 
 % ------------------------------------------------------------------------------
+% Composition
+% ------------------------------------------------------------------------------
+\subsubsection{Composition}
+\label{sec:vision_composition}
+
+The first subcomponent is Google CoLab, which is a collaborative python
+programing space that provides access to cloud computing. We use Google CoLab
+for its GPU to train and test our computer vision model. The second
+subcomponent is YOLOv4, which is an object detection algorithm. It works by
+dividing images into a grid system with each cell in the grid responsible
+for detecting objects within itself. The third subcomponent is Darknet,
+which is a neural network framework written in C and CUDA. We use this
+in conjunction with YOLOv4 to complete object detection. The fourth
+subcomponent is OpenCV, which contains an optimized computer vision
+library, tools, and hardware all aimed at real-time object recognition.
+We are testing this as a second option to compare the results with
+YOLOv4 and Darknet. The fifth and final subcomponent is LabelIMG, which
+is a graphical image annotation tool. We use this to label our images
+prior to using them to train our computer vision model.
+\par
+
+% ------------------------------------------------------------------------------
 % Resources
 % ------------------------------------------------------------------------------
 \subsubsection{Resources}
 \label{sec:resources}
+
+The other component that will be receiving the data is Navigation, either by
+sending them the data of the output of the bounding box as well as the angle
+and distance that the robot is from the identified object, which will be
+whatever object they present us with during the competition. The only
+side-effects that we could experience in this component would be if we were to
+mislabel an input from the camera.
 
 % ------------------------------------------------------------------------------
 % Interface/Exports
@@ -77,6 +203,11 @@
 \subsubsection{Interface/Exports}
 \label{sec:exports}
 
+\begin{itemize}
+    \item Export bounding box to Navigation Controls 
+    \item Export distance from the robosub to the object to Navigation Controls 
+    \item Export angle between robosub and object to Navigation Controls 
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Controls Module
@@ -90,11 +221,37 @@
 \subsubsection{Responsibilities}
 \label{sec:responsibilities}
 
+Controls acts as the primary interface between the hardware and the software
+for communications to the main motherboard and ROS operating system. It is
+responsible for allowing the various software components to communicate back
+and forth with all the sensors, motors, and actuators attached to the robot as
+necessary.
+\par
+
 % ------------------------------------------------------------------------------
 % Constraints
 % ------------------------------------------------------------------------------
 \subsubsection{Contraints}
 \label{sec:constraints}
+
+The main constraint on the controls module is the hardware. The hardware is 
+limited to the software libraries that are provided by the manufacturer and the
+communication protocols that are supported by the hardware.
+
+% ------------------------------------------------------------------------------
+% Composition
+% ------------------------------------------------------------------------------
+\subsubsection{Composition}
+\label{sec:control_composition}
+
+The controls module is composed of the following subcomponents:
+\begin{itemize}
+    \item Vector Nav VN-100 IMU
+    \item Bar30 Pressure Sensor
+    \item Blue Robotics T200 Thruster
+    \item Blue Robotics Ping1D Sonar
+    \item Teledyne Pathfinder DVL
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % User Interactions
@@ -102,17 +259,44 @@
 \subsubsection{User Interactions}
 \label{sec:interactions}
 
+\begin{itemize}
+    \item Retrieving data from the IMU sensor 
+    \item Retrieving data from the DVL sensor  
+    \item Retrieving data from the Barometer 
+    \item Retrieving and processing the data from the Hydrophones 
+    \item Sending commands to motor controller 
+    \item Sending data through the Sonar 
+    \item Publishing data to ROS
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 % Resources
 % ------------------------------------------------------------------------------
 \subsubsection{Resources}
 \label{sec:resources}
 
+\begin{itemize}
+    \item IMU \url{https://www.vectornav.com/products/vn-100}
+    \item Barometer \url{https://www.bluerobotics.com/store/electronics/bar30-pressure-sensor-r1/}
+    \item Thruster \url{https://www.bluerobotics.com/store/electronics/t200-thruster-r2/}
+    \item Sonar \url{https://www.bluerobotics.com/store/electronics/ping1d-sonar-r2/}
+    \item DVL \url{https://www.teledyne-rdi.com/products/instruments/pathfinder-dvl/}
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 % Interface/Exports
 % ------------------------------------------------------------------------------
 \subsubsection{Interface/Exports}
 \label{sec:exports}
+
+\begin{itemize}
+    \item Publish IMU data to ROS 
+    \item Publish DVL data to ROS 
+    \item Publish Barometer data to ROS 
+    \item Publish Hydrophone data to ROS 
+    \item Publish Sonar data to ROS 
+    \item Publish Thruster data to ROS
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 % Localization Module
@@ -126,11 +310,34 @@
 \subsubsection{Responsibilities}
 \label{sec:responsibilities}
 
+The primary responsibility of this component is to allow the RoboSub to know
+with a certain degree of certainty its location within a three-dimensional
+space. This component will take in sensor data from the inertial measurement
+unit (IMU), sonar, hydrophones, and barometer and use these data to estimate a
+position. It will then broadcast this position information through an ROS node
+to make it available to the rest of the software systems.
+\par
+
 % ------------------------------------------------------------------------------
 % Constraints
 % ------------------------------------------------------------------------------
 \subsubsection{Contraints}
 \label{sec:constraints}
+
+The main limitation in this component is that localization is probabilistic due
+to the inherent noise in the sensor data. Sensor noise is unavoidable therefore
+solutions that seek to minimize the noise’s impact in the system will help to
+reduce the propagation of errors in the estimates providing an overall better
+``guess'' at the RoboSub location. 
+\par
+
+% ------------------------------------------------------------------------------
+% Composition
+% ------------------------------------------------------------------------------
+\subsubsection{Composition}
+\label{sec:localiztion_composition}
+
+TBD.
 
 % ------------------------------------------------------------------------------
 % User Interactions
@@ -138,17 +345,32 @@
 \subsubsection{User Interactions}
 \label{sec:interactions}
 
+The localization component will be used by the following: 
+\begin{itemize}
+    \item Autonomy: Pathfinding and decision-making. 
+    \item Computer vision: Landmark discovery. 
+    \item Mapping: S.L.A.M.
+\end{itemize}
+
 % ------------------------------------------------------------------------------
 % Resources
 % ------------------------------------------------------------------------------
 \subsubsection{Resources}
 \label{sec:resources}
 
+The localization component requires sensor data from the Controls module.
+Localization will process this data into position information. This component
+will work in conjunction with the Mapping component to produce position and
+environment information.
+\par
+
 % ------------------------------------------------------------------------------
 % Interface/Exports
 % ------------------------------------------------------------------------------
 \subsubsection{Interface/Exports}
 \label{sec:exports}
+
+TBD.
 
 % ------------------------------------------------------------------------------
 % Mapping Module
@@ -162,11 +384,24 @@
 \subsubsection{Responsibilities}
 \label{sec:responsibilities}
 
+The primary responsibility of this component is to create a three-dimensional
+map of the space surrounding the RoboSub. This component will also be able to
+place landmarks or key locations within this map. The goal is to allow the
+RoboSub to search its environment and keep track of everything of the
+boundaries and landmarks found within those boundaries.
+\par
+
 % ------------------------------------------------------------------------------
 % Constraints
 % ------------------------------------------------------------------------------
 \subsubsection{Contraints}
 \label{sec:constraints}
+
+% ------------------------------------------------------------------------------
+% Composition
+% ------------------------------------------------------------------------------
+\subsubsection{Composition}
+\label{sec:mapping_composition}
 
 % ------------------------------------------------------------------------------
 % User Interactions
