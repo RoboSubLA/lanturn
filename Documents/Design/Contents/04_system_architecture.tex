@@ -1,3 +1,126 @@
+% ------------------------------------------------------------------------------
+% System Architecture
+% ------------------------------------------------------------------------------
 \section{System Architecture}
 \label{sec:architecture}
+
+The software on Lanturn is organized into a number of modules, each of which is
+responsible for a specific task. These modules are build on the ROS framework
+and communicate with each other using ROS messages.
+
+% ------------------------------------------------------------------------------
+% Overview of the System
+% ------------------------------------------------------------------------------
+\subsection{Overview of the System}
+\label{sec:overview}
+ 
+Computer Vision shall output to: Mapping, Localization. Mapping shall output
+to: Autonomy, Localization. Localization shall output to: Autonomy Autonomy
+shall output to: Controls. Controls shall output to: Mapping, Localization.
+\par
+
+Autonomy will manage time, manage state machines, read and interpret
+mapping/localization data, read and filter computer vision data, control claw,
+shoot torpedoes, release dropper,  autonomously navigate map, and
+position/orient/center to desired orientations. 
+\par
+
+Comp Vision will publish raw images from front and bottom cams, detect and
+classify all task objects, provide distance from objects, calculate angle of
+incidence of objects. 
+\par
+
+Controls will read and publish data from Bar30 barometer, VN-100 IMU, Teledyne
+DVL, Sonar. Controls will also implement a PID library, generate PWM values
+that will move the sub to desired position, output PWM values to thrusters.
+Controls will also control a mechanical claw, shoot torpedoes, and release a
+ball from dropper all on command. 
+\par
+
+Mapping will subscribe to all computer vision data and Sonar data. Mapping will
+also implement a Kalman Filter, generate a map of the environment, position all
+task objects in map, and publish map. 
+\par
+
+Localization will subscribe to IMU data topic, Barometer data topic, both
+camera topics, DVL data topic, and map topic. Localization will position and
+orient the sub inside the map, and publish localization data.
+\par
+
+% ------------------------------------------------------------------------------
+% Autonomy
+% ------------------------------------------------------------------------------
+\subsection{Autonomy}
+\label{sec:autonomy}
+
+The autonomy part of the software is responsible for completing the robosub
+goals. This is done using a state machine and using the ROS software to
+navigate the data to move from one state to another until each goal is
+completed, battery runs out, or time limit of 20 minutes is exceeded. The state
+machines are subscribed to all hardware components to be able to determine
+ubliches the next goal, and to controls to reach the next goal or complete the
+task. Each task/goal is broken down into their own states in their own class.
+Future implementation will move from state machine to behavior tree which
+allows for system to be goal oriented instead.
+\par
+
+% ------------------------------------------------------------------------------
+% Computer Vision
+% ------------------------------------------------------------------------------
+\subsection{Computer Vision}
+\label{sec:computer_vision}
+
+The DFD Level 1 will start with the Camera sending information to the Image
+Processor, after processing the image it will send the information to Object
+Detection. Object Detection will process that information and once it’s able to
+detect the object it will send the data to Object Classification, and it will
+define the location of the object. Once Object Classification processes the
+data of the object detected, it will send a Message Output. The Message Output
+will give out the data of the Object ID and the Bounding Box.
+\par
+
+% ------------------------------------------------------------------------------
+% Controls
+% ------------------------------------------------------------------------------
+\subsection{Controls}
+\label{sec:controls}
+
+The controls code has the same form as any other microcontroller code. It
+starts with a setup() function then starts executing a loop() function until
+told to otherwise. 
+\par
+
+In the setup() function, sensors, actuators and the thruster motors are
+initialized and general setup like importing libraries and configuring the PID
+controller is done here. This function is executed once then control is turned
+over to the loop() function. 
+\par
+
+The loop() function contains the code for the PID controller, sensor reading
+and actuator control that will run independently. The flow of the data is this:
+grab sensor data, fix setpoints to account for circular rollover error, compute
+PWM values, combine the PWM values, output them to the ESCs and loop back to
+the beginning.
+\par
+
+% ------------------------------------------------------------------------------
+% Localization
+% ------------------------------------------------------------------------------
+\subsection{Localization}
+\label{sec:localization}
+
+The localization node takes input data from the various environmental sensors
+(IMU, Sonar, Barometer, DVL, hydrophones). Localization will process this data
+and then publish the processed data to the entire system. Any node that
+subscribes will have access to the data.
+\par
+
+% ------------------------------------------------------------------------------
+% Mapping
+% ------------------------------------------------------------------------------
+\subsection{Mapping}
+\label{sec:mapping}
+
+TBD.
+\par
 

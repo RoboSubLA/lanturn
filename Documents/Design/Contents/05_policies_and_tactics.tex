@@ -1,33 +1,165 @@
+% ------------------------------------------------------------------------------
+% Policy and Tactics
+% ------------------------------------------------------------------------------
 \section{Policies and Tactics}
 \label{sec:policies}
 
+The main influences on Lanturn’s Software design has already been established
+by previous years. 
+\par
+
+Some adjustments have been made by individuals to suit their ideas and
+programming style, but most of the system is inherited from previous years.
+\par
+
+% ------------------------------------------------------------------------------
+% Specific Product Used
+% ------------------------------------------------------------------------------
 \subsection{Specific Product Used}
 \label{sec:specific}
 
+\begin{itemize}
+    \item System 
+        \begin{itemize}
+            \item Operating System 
+            \item Ubuntu 20.04 
+            \item Build System 
+            \item Colcon 
+            \item Ament\_cmake 
+        \end{itemize}
+
+    \item Autonomy 
+        \begin{itemize}
+            \item Visual Studio Code 
+            \item Groot 
+            \item SMACH 
+            \item BehaviorTree.CPP 
+        \end{itemize}
+
+    \item Controls 
+        \begin{itemize}
+            \item Visual Studio Code 
+            \item Platform.I0 
+        \end{itemize}
+
+    \item Computer Vision 
+        \begin{itemize}
+            \item LabelIMG 
+            \item Google CoLab 
+            \item YOLOv4 
+            \item Darknet 
+            \item OpenCV 
+        \end{itemize}
+
+    \item Mapping and Localization 
+        \begin{itemize}
+            \item Gazebo 
+            \item Visual Studio Code 
+            \item Cubik Studio
+        \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Requirements Traceability
+% ------------------------------------------------------------------------------
 \subsection{Requirements Traceability}
 \label{sec:traceability}
 
+Each module of the system will have its own git repository. The sub-team
+assigned to the module will be responsible for keeping detailed documentation
+for the process of setting up, installing and using the software module.
+\par
+
+% ------------------------------------------------------------------------------
+% Testing the Software
+% ------------------------------------------------------------------------------
 \subsection{Testing the Software}
 \label{sec:testing}
 
+\begin{itemize}
+    \item Navigation 
+        \begin{itemize}
+            \item Create Gazebo Simulation for localization testing 
+            \item Unit test for processing sensor data 
+            \item Unit test for noise filter on sensor data 
+            \item Unit test for publishing position data 
+            \item Unit test for subscribing to position data 
+        \end{itemize}
+
+    \item Autonomy 
+        \begin{itemize}
+            \item Create unit test for states.  
+            \item Create unit test for publishers 
+            \item Create unit test for subscribers. 
+            \item Simulate test environment for states 
+            \item Simulate test environment for publishers 
+            \item Simulate test environment for subscribers 
+            \item Use testing AUV (Blastoise)
+        \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Engineering Trade-Offs
+% ------------------------------------------------------------------------------
 \subsection{Engineering Trade-Offs}
 \label{sec:tradeoffs}
 
+ROS is the leading opensource robotics software in use today. There are no
+engineering tradeoffs with hardware and software support being
+mutigenerational. 
+\par
+
+% ------------------------------------------------------------------------------
+% Guidelines and Conventions
+% ------------------------------------------------------------------------------
 \subsection{Guidelines and Convetions}
 \label{sec:guidelines}
 
+Using the selected IDE and choice of CPP instead of python ensures that the
+languages general convention is enforced.
+\par
+
+% ------------------------------------------------------------------------------
+% Protocols
+% ------------------------------------------------------------------------------
 \subsection{Protocols}
 \label{sec:protocols}
 
+By using ROS the built in API of the standardized subscriber and publisher
+model is always enforced.
+\par
+
+% ------------------------------------------------------------------------------
+% Maintaining the Software
+% ------------------------------------------------------------------------------
 \subsection{Maintianing the Software}
 \label{sec:maintain}
 
+No plans to maintain software, only fix bugs. The software is specially
+attached to the hardware, the only way to maintain software or update is to
+upgrade hardware. If we do that then we need to refactor or use a different ROS
+version.
+\par
+
+% ------------------------------------------------------------------------------
+% Interfaces
+% ------------------------------------------------------------------------------
 \subsection{Interfaces}
 \label{sec:interfaces}
 
+There is no interface for users, fully autonomous, web GUI subscribes to
+publishers for user visualization.
+\par
+
+% ------------------------------------------------------------------------------
+% System Deliverables
+% ------------------------------------------------------------------------------
 \subsection{System Deliverables}
 \label{sec:deliverables}
 
+% ------------------------------------------------------------------------------
+% Abstractions
+% ------------------------------------------------------------------------------
 \subsection{Abstractions}
 \label{sec:abstractions}
 
