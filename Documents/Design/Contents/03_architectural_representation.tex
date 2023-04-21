@@ -1,0 +1,23 @@
+% ------------------------------------------------------------------------------
+% Architectural Strategies
+% ------------------------------------------------------------------------------
+\section{Architectural Strategies}
+\label{sec:representation}
+
+Each module will be programmed and packaged as a ROS2 package, except for the
+controls module which will exist as firmware on the microcontroller. Even
+though the microcontroller won’t be a ROS package, it will still have all the
+characteristics of a ROS2 package; it will be entirely modular, using the same
+communication system provided by ROS2. 
+\par
+
+The controls module will interface with actuators, sensors and thrusters. The
+computer vision module will interface with cameras. All other modules will
+exist as software and will go through the controls and computer vision modules
+to interact with the environment. 
+\par
+
+Additionally, there will be a watchdog service that will monitor the liveliness
+and diagnostics of the system.
+\par
+

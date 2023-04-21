@@ -1,0 +1,252 @@
+% ------------------------------------------------------------------------------
+% Overall Description
+% ------------------------------------------------------------------------------
+\section{Overall Description}
+\label{sec:overall}
+
+The requirements for the software developed for Lanturn will be largely derived
+from version 3 of the 2022 RoboSub Mission Handbook. The mission handbook
+states the logistics of the competition, the rules during the competition and
+the tasks to be done by any AUV participating.  
+\par
+
+Along with the requirements derived from the 2022 Mission Handbook, additional
+requirements will be added based on what was learned from previous years and
+from suggestions from the team’s advisor(s). 
+\par
+
+As of the publish date of this document, the 2023 Mission Handbook has not been
+released. In later versions of this document, the requirements will be updated
+for every version released of the 2023 Mission Handbook.
+\par
+
+% ------------------------------------------------------------------------------
+% System Analysis
+% ------------------------------------------------------------------------------
+\subsection{System Analysis}
+\label{sec:analysis}
+
+The goal of the project is to develop software that will accomplish as many
+tasks as possible as quickly as possible with the sensors and actuators
+available on the submarine.
+
+\begin{enumerate}
+    \item Problems
+        \begin{itemize}
+            \item 100\% autonomous operation
+            \item Submodule checks
+            \item Data accuracy
+            \item Testing Limitations
+            \item Self-diagnosis
+            \item Lanturn manufacturing time
+        \end{itemize}
+    \item Solutions
+        \begin{itemize}
+            \item Behavior Trees
+            \item Global watchdog service
+            \item Local watchdog services
+            \item Sensor fusion
+            \item Simulation
+        \end{itemize}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% Product Perspective
+% ------------------------------------------------------------------------------
+\subsection{Product Perspective}
+\label{sec:perspective}
+
+The RoboSub Organization states the following on their website: “The behaviors
+demonstrated by these experimental AUVs mimics those of real-world systems,
+currently deployed around the world for underwater exploration, seafloor
+mapping, and sonar localization, amongst many others.” [1] 
+\par
+
+Since Lanturn is to be completely autonomous, the system itself is completely
+isolated from all other systems, an exception is when it is tethered to an
+external computer for real-world testing and (re)configuration. 
+\par
+
+Concepts used by all or some modules in the AUV can be applied to computer
+networks, other robotics projects, surveillance systems, ROVs (remote operated
+vehicle), UAV (Unmanned aerial vehicles), video-game programs (programming
+behavior of NPCs), electronics projects, systems designed for underwater
+exploration (or general exploration of territory), systems designed for
+planetary exploration, cartography, localization, any system that will benefit
+from more accurate sensor data, agriculture (autonomous behavior) and other
+software systems.
+\par
+
+% ------------------------------------------------------------------------------
+% Product Functions
+% ------------------------------------------------------------------------------
+\subsection{Product Functions}
+\label{sec:functions}
+
+Functionality of the software will be derived from the requirements of the
+2022 RoboSub Mission Handbook. The software will be designed to accomplish the
+tasks listed in the mission handbook.
+
+\begin{enumerate}
+    \item With Moxy (Coin Flip) 
+    \item Choose Your Side (Gate) 
+    \item Collecting (Bins) 
+    \item Make the Grade (Buoys) 
+    \item Survive the Shootout (Torpedoes) 
+    \item Cash or Smash (Octagon) 
+    \item Follow Orange Guide Markers
+\end{enumerate}
+
+None of the functions (tasks) laid out in the Mission Handbook are required
+(except Choose Your Side), however, the more tasks the AUV can do, the more
+points will be scored for the mission. The assumption that will be made, for
+now, is that all tasks will at least be attempted.
+\par
+
+Other functions that will be implemented are:
+\begin{itemize}
+    \item Autonomous navigation
+    \item Autonomous decision making
+    \item Object detection
+    \item Object classification
+    \item Object relative position estimation
+    \item Vehicle localization
+    \item Vehicle state estimation
+    \item Vehicle state control
+    \item Vehicle state monitoring
+    \item Vehicle state logging
+    \item Environment mapping
+\end{itemize}
+
+The functionality listed above is all the general functionality that will
+enable Lanturn to accomplish any one of the competition tasks.
+\par
+
+% ------------------------------------------------------------------------------
+% User Classes and Characteristics
+% ------------------------------------------------------------------------------
+\subsection{User Classes and Characteristics}
+\label{sec:classes}
+
+% define column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Horizontal Cell Padding
+
+% define table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Vertical Cell Padding
+    \begin{tabularx}{\textwidth}{| P{6em} | X |}
+        \hline
+        \textbf{User Class} & \textbf{Description} \\
+        \hline
+        Swimmer     & Will start Lanturn and monitor its state. \\
+        \hline
+        Tester      & Will verify that Lanturn is working as expected. \\
+        \hline
+        Developer   & Will develop the software for Lanturn. \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:classes} User Classes and Characteristics}
+}
+\end{table}
+
+% ------------------------------------------------------------------------------
+% Operating Environment
+% ------------------------------------------------------------------------------
+\subsection{Operating Environment}
+\label{sec:environment}
+
+The hardware that will be used for the development of Lanturn is the following:
+
+\textbf{TX2 Module with Development Kit Carrier Board}
+\begin{itemize}
+    \item Ubuntu 20.04
+    \item NVIDIA JetPack 4.5
+    \item NVIDIA CUDA 10.2
+    \item NVIDIA cuDNN 8.0
+    \item NVIDIA TensorRT 7.1
+    \item ROS2 Foxy Fitzroy
+    \item OpenCV 4.5.1
+    \item Python 3.8.10+
+    \item C++ 17
+\end{itemize}
+
+The software will be developed on a computer running Ubuntu 20.04 and using the
+ROS2 framework.
+\par
+
+\textbf{Teensy 4.1}
+\begin{itemize}
+    \item PlatformIO
+    \item Arduino Framework
+    \item Micro-ros-plarformio
+    \item C++ 17
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Design and Implementation Constraints
+% ------------------------------------------------------------------------------
+\subsection{Design and Implementation Constraints}
+\label{sec:constraints}
+
+All software (except interfaces with sensors and actuators) must be implemented
+in Ubuntu 20.04, as that is the only operating system that is supported by the
+Nvidia TX2 module. By extension, any software designed to be run in the TX2
+module will also have to be a ROS2 package. 
+\par
+
+All software designed to interface with sensors or actuators must be compatible
+with communication protocols available for the Teensy 4.1 microcontroller. 
+\par
+
+All software designed must follow the limitations set by the policies listed in
+the Mission Handbook provided by RoboNation. 
+\par
+
+If, the ME/EE team for RoboSub cannot design or manufacture any of the
+actuators, that is, the claw, torpedoes, or dropper, then the software team
+will not be able to test or implement any software designed to execute any
+functionality requiring missing actuator(s).
+\par
+
+% ------------------------------------------------------------------------------
+% User Documentation
+% ------------------------------------------------------------------------------
+\subsection{User Documentation}
+\label{sec:documentation}
+
+Each sub-module of the system will come with documentation in the form of a
+README.md on the project’s GitHub repository. 
+\par
+
+The structure of the README’s will be as follows: 
+
+\begin{enumerate}
+    \item Overview: An overview of the role played by the submodule 
+    \item Dependencies: A list of dependencies required to develop and run the sub-module 
+    \item Installation: Instructions on how to install any software needed for the submodule 
+    \item Setup: Instructions on how to setup the environment for either development or deployment 
+    \item Usage: Instructions on how to use the submodule on the submarine and on the field 
+    \item Problems and Fixes: Common issues encountered and, either, how to fix or work around the issue 
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% Assumptions and Dependencies
+% ------------------------------------------------------------------------------
+\subsection{Assumptions and Dependencies}
+\label{sec:assumptions}
+
+The assumption while developing the software for this system is that the rules
+for the 2023 RoboSub competition will largely remain the same as the previous
+year.
+
+% ------------------------------------------------------------------------------
+% Apporitionment of Requirements
+% ------------------------------------------------------------------------------
+\subsection{Apportionment of Requirements}
+\label{sec:apportionment}
+
+New software requirements may arise from the release of the 2023 RoboSub
+Mission Handbook, and it is the responsibility of the team to adjust the
+software system to any new requirement.
+

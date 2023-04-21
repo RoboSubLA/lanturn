@@ -1,0 +1,76 @@
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc}    % Output font encoding for international characters
+
+\usepackage{mathpazo}       % Palatino font
+
+\usepackage{datetime}       % Required for date formatting
+\usepackage{geometry}       % Required for margins
+\usepackage{graphicx}       % Required for adding images
+\usepackage{hyperref}       % Required for adding hyperlinks
+\usepackage{parskip}        % Required for paragraph spacing
+\usepackage{tabularx}       % Required for easier to manage tables
+
+
+\geometry{                  % Geometry setup
+    a4paper,
+    left=2.5cm,
+    top=2.5cm,
+    right=2.5cm,
+    bottom=2.5cm
+}
+
+\hypersetup{                % Hyperlink setup
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan
+}
+
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+%	TITLE PAGE
+%-------------------------------------------------------------------------------
+\input{Contents/00_title_page.tex}
+
+%-------------------------------------------------------------------------------
+% Table of Contents
+%-------------------------------------------------------------------------------
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\label{sec:toc}
+\addcontentsline{toc}{section}{\nameref{sec:toc}}
+\newpage
+
+%-------------------------------------------------------------------------------
+% Revision History
+%-------------------------------------------------------------------------------
+\input{Contents/00_revision_history.tex}
+\newpage
+
+%-------------------------------------------------------------------------------
+% Content
+%-------------------------------------------------------------------------------
+\input{Contents/01_introduction.tex}
+
+\input{Contents/02_overall_description.tex}
+
+\input{Contents/03_external_interface_requirements.tex}
+
+\input{Contents/04_requirements_specification.tex}
+
+\input{Contents/05_other_non_functional_requirements.tex}
+
+\input{Contents/06_appendices.tex}
+
+\bibliographystyle{plain}
+\bibliography{../references}
+%-------------------------------------------------------------------------------
+\end{document}

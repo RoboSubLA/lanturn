@@ -1,0 +1,88 @@
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc}    % Output font encoding for international characters
+
+\usepackage{mathpazo}       % Palatino font
+
+\usepackage{datetime}       % Required for date
+\usepackage{geometry}       % Required for margins
+\usepackage{graphicx}       % Required for adding images
+\usepackage{hyperref}       % Required for adding hyperlinks
+\usepackage{tabularx}       % Required for tables
+
+
+\geometry{                  % Geometry setup
+    a4paper,
+    left=2.5cm,
+    top=2.5cm,
+    right=2.5cm,
+    bottom=2.5cm
+}
+
+\hypersetup{                % Hyperlink setup
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan
+}
+
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% Title Page
+%-------------------------------------------------------------------------------
+\input{Contents/00_title_page.tex}
+
+%-------------------------------------------------------------------------------
+% Table of Contents
+%-------------------------------------------------------------------------------
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\label{toc}
+\addcontentsline{toc}{section}{\nameref{toc}}
+\newpage
+
+%-------------------------------------------------------------------------------
+% Revision History
+%-------------------------------------------------------------------------------
+\input{Contents/00_revision_history.tex}
+\newpage
+
+%-------------------------------------------------------------------------------
+% Content
+%-------------------------------------------------------------------------------
+\input{Contents/01_introduction.tex}
+
+\input{Contents/02_design_considerations.tex}
+
+\input{Contents/03_architectural_representation.tex}
+
+\input{Contents/04_system_architecture.tex}
+
+\input{Contents/05_policies_and_tactics.tex}
+
+\input{Contents/06_detailed_system_design.tex}
+
+\input{Contents/07_detailed_lower_level_component_design.tex}
+
+\input{Contents/08_database_design.tex}
+
+\input{Contents/09_user_interface.tex}
+
+\input{Contents/10_requirements_validation_and_verification.tex}
+
+\input{Contents/11_glossary.tex}
+
+\input{Contents/12_references.tex}
+
+\bibliographystyle{plain}
+\bibliography{../references}
+
+%-------------------------------------------------------------------------------
+\end{document}

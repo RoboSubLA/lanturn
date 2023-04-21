@@ -1,0 +1,182 @@
+\newpage
+\section{Requirements Validation and Verification}
+\label{sec:validation}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % for column spacing
+
+% Autonomy Requirements Table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{5em} | X | P{6em}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Requirements related to: Autonomy}} \\
+        \hline
+        \textbf{Number} & \textbf{Task} & \textbf{Test Method} \\
+        \hline
+        1.1 & The autonomy module shall manage time in a run through the cours& Unit\\
+        \hline
+        1.2 & The autonomy module shall send current state to system logs & Unit \\
+        \hline
+        1.3 & The autonomy module shall read and interpret mapping data & Unit \\
+        \hline
+        1.4 & The autonomy module shall read and interpret localization data & Unit \\
+        \hline
+        1.5 & The autonomy module shall read and filter computer vision data & Unit \\
+        \hline
+        1.6 & The autonomy module shall send command to control claw & Unit \\
+        \hline
+        1.7 & The autonomy module shall send command to shoot torpedoes & Unit \\
+        \hline
+        1.8 & The autonomy module shall send command to release dropper & Unit \\
+        \hline
+        1.9 & The autonomy module shall send a heartbeat to the watchdog service & Unit \\
+        \hline
+        1.10 & The autonomy module shall know the task being executed & Unit \\
+        \hline
+        1.11 & The autonomy module shall autonomously navigate map & Unit \\
+        \hline
+        1.12 & The autonomy module shall position submarine in a desired position & Unit \\
+        \hline
+        1.13 & The autonomy module shall orient submarine in a desired orientation & Unit \\
+        \hline
+        1.14 & The autonomy module shall be able to center with objects & Unit \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:autonomy_req} Requirements related to autonomy.}
+
+}
+\end{table}
+
+% Computer Vision Requirements Table
+\begin{table}[ht]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{5em} | X | P{6em}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Requirements related to: Computer Vision}} \\
+        \hline
+        \textbf{Number} & \textbf{Task} & \textbf{Test Method} \\
+        \hline
+        2.1 & The Computer Vision shall send a heartbeat to the watchdog service   & Functional  \\
+        \hline
+        2.2 & The Computer Vision shall publish raw images from front camera & Functional  \\
+        \hline
+        2.3 & The Computer Vision shall publish raw images from bottom camera   & Functional  \\
+        \hline
+        2.4 & The Computer Vision shall receive images from front camera & Functional  \\
+        \hline
+        2.5 & The Computer Vision shall receive images from bottom camera & Functional  \\
+        \hline
+        2.6 & The Computer Vision shall detect and classify all task objects   & Functional  \\
+        \hline
+        2.7 & The Computer Vision shall publish bounding boxes of objects & Functional  \\
+        \hline
+        2.8 & The Computer Vision shall provide distance from objects & Functional  \\
+        \hline
+        2.9 & The Computer Vision shall calculate angle of incidence of objects & Functional \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:vision_req} Requirements related to Computer Vision.}
+}
+\end{table}
+
+
+% Controls Requirements Table
+\begin{table}[ht]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{5em} | X | P{6em}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Requirements related to: Controls}} \\
+        \hline
+        \textbf{Number} & \textbf{Task} & \textbf{Test Method} \\
+        \hline
+        3.1 & The Controls shall send a heartbeat to the watchdog service   & Unit  \\
+        \hline
+        3.2 & The Controls shall read and publish data from Bar30 barometer & Unit  \\
+        \hline
+        3.3 & The Controls shall read and publish data from VN-100 IMU & Unit  \\
+        \hline
+        3.4 & The Controls shall read and publish data from Teledyne DVL & Unit  \\
+        \hline
+        3.5 & The Controls shall read and publish data from Sonar & Unit  \\
+        \hline
+        3.6 & The Controls shall implement a PID Library & Unit  \\
+        \hline
+        3.7 & The Controls shall generate PWM values that will move submarine to a desired position and/or orientation & Unit  \\
+        \hline
+        3.8 & The Controls shall output PWM values to thrusters & Unit  \\
+        \hline
+        3.9 & The Controls shall clench and release a mechanical claw on command & Unit  \\
+        \hline
+        3.10 & The Controls shall shoot torpedoes on command & Unit  \\
+        \hline
+        3.11 & The Controls shall release ball from dropper on command & Unit \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:controls_req} Requirements related to Controls.}
+}
+\end{table}
+
+
+% Mapping Requirements Table
+\begin{table}[ht]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{5em} | X | P{6em}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Requirements related to: Mapping}} \\
+        \hline
+        \textbf{Number} & \textbf{Task} & \textbf{Test Method} \\
+        \hline
+        4.1 & The mapping module shall send a heartbeat to the watchdog service   & Unit  \\
+        \hline
+        4.2 & The mapping module shall subscribe to all computer vision data & Unit  \\
+        \hline
+        4.3 & The mapping module shall subscribe to Sonar data & Unit  \\
+        \hline
+        4.4 & The mapping module shall implement a Kalman Filter & Unit  \\
+        \hline
+        4.5 & The mapping module shall generate a map of environment & Unit  \\
+        \hline
+        4.6 & The mapping module shall position all task objects in map & Unit  \\
+        \hline
+        4.7 & The mapping module shall publish map & Unit  \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:mapping_req} Requirements related to Mapping Module.}
+}
+\end{table}
+
+% Localization Requirements Table
+\begin{table}[htbp]
+{
+    \renewcommand{\arraystretch}{1.5} % Row spacing
+    \begin{tabularx}{\textwidth}{| P{5em} | X | P{6em}|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Requirements related to: Localization}} \\
+        \hline
+        \textbf{Number} & \textbf{Task} & \textbf{Test Method} \\
+        \hline
+        5.1 & The localization module shall send heartbeat to the watchdog service   & Unit  \\
+        \hline
+        5.2 & The localization module shall subscribe to IMU data topic & Unit  \\
+        \hline
+        5.3 & The localization module shall subscribe to Barometer data topic & Unit  \\
+        \hline
+        5.4 & The localization module shall subscribe to both camera topics & Unit  \\
+        \hline
+        5.5 & The localization module shall subscribe to DVL data topic & Unit  \\
+        \hline
+        5.6 & The localization module shall subscribe to map topic & Unit  \\
+        \hline
+        5.7 & The localization module shall position and orient submarine inside the map & Unit  \\
+        \hline
+        5.8 & The localization module shall publish localization data & Unit \\
+        \hline
+    \end{tabularx}
+    \caption{\label{tab:localization_req} Requirements related to the Localization Module.}
+}
+\end{table}
+

@@ -1,0 +1,65 @@
+% Suppresses page number on the title page
+% Subsequent page starts page count at 1
+\begin{titlepage} 
+
+    % Defines a new command for horizontal lines, change thickness here
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+	\center % Center everything on the page
+
+	%------------------------------------------------
+	%	Main Heading
+	%------------------------------------------------
+    % Main heading
+	\textsc{\LARGE California State University, Los Angeles}\\[1.5cm] 
+
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	\HRule\\[0.4cm]
+    % Title
+    {\huge\bfseries Software Requirements Document}\\[0.4cm] 
+	\HRule\\[1.5cm]
+
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	\vfill\vfill
+    % Include a department/university logo
+	\includegraphics[width=0.5\textwidth]{../robosub_logo.png}\\[1cm] 
+
+	%------------------------------------------------
+	%	Major Heading
+	%------------------------------------------------
+    % Major heading
+	\textsc{\Large RoboSub}\\[0.5cm] 
+    % Minor heading
+	% \textsc{\large }\\[0.5cm] 
+
+	%------------------------------------------------
+	%	Author(s)
+	%------------------------------------------------
+	{\large\textit{Members}}\\
+	Thomas \textsc{Benson},
+	David \textsc{Camacho},
+	Bailey \textsc{Canham},
+	Brandon \textsc{Cao},\\
+	Roberto \textsc{Hernandez},
+	Andrew \textsc{Heusser},
+    Hector \textsc{Mora-Silva},\\
+	Bart \textsc{Rando},
+	Victor \textsc{Solis}
+
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+    % Position the date 3/4 down the remaining page
+	\vfill\vfill\vfill 
+    % Date
+	{\large\today} 
+
+	%---------------------------------------------------------------------------
+    % Push the date up 1/4 of the remaining page
+	\vfill 
+
+\end{titlepage}
+

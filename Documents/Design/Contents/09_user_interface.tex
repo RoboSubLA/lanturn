@@ -1,0 +1,64 @@
+% ------------------------------------------------------------------------------
+% User Interface
+% ------------------------------------------------------------------------------
+\section{User Interface}
+\label{sec:userinterface}
+
+% ------------------------------------------------------------------------------
+% Overview of User Interface
+% ------------------------------------------------------------------------------
+\subsection{Overview of User Interface}
+\label{sec:overviewui}
+
+At the end of this project, there will be a custom user interface designed
+specifically for Lanturn to aid in interacting with the running ROS system. 
+\par
+
+While custom interfaces are implemented, there are already implemented ROS
+integrated User Interfaces, RQT and Rviz.  
+\par
+
+RQT is the one that can be used by any ROS system and be the one that will be
+demonstrated here.
+\par
+
+% ------------------------------------------------------------------------------
+% Screen Frameworks or Images
+% ------------------------------------------------------------------------------
+\subsection{Screen Frameworks or Images}
+\label{sec:frameworks}
+
+% ------------------------------------------------------------------------------
+% RQT
+% ------------------------------------------------------------------------------
+\subsubsection{RQT}
+
+RQT is a user interface that comes packages with ROS and other visualization
+tools. Ir can be used to read, send and interpret data. It allows a user to
+interact with the ROS system the GUI is connected to. It uses the concepts of
+plugins to allow the user to view different forms of data and interpret them in
+different ways. 
+\par
+
+In this image, there are six plugins open. 
+\begin{enumerate}
+    \item Top Left. The Process Monitor plugin helps the user see all processes interacting with or through the ROS system. 
+    \item Top Center. The MatPlot plugin can interpret data in a grid form and, in the context of Lanturn, it can be used to interpret stability, velocity and other odometry data. 
+    \item Top Right. The Message Publisher allows the user to send different messages to nodes in the ROS system. 
+    \item Bottom Right. The Console plugin displays log messages the nodes in the ROS system are saving. 
+    \item Bottom Center. The Image View plugin displays images that are being streamed through a topic. 
+    \item Bottom Right. The Topic Monitor shows the topics in the current ROS system and allows users to see what messages are going through the topic.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+% User Interface Flow Diagrams
+% ------------------------------------------------------------------------------
+\subsection{User Interface Flow Diagrams}
+\label{sec:flowdiagrams}
+
+The RQT user interface uses plugins to display information giving the user full
+control as to what is displayed and what is not. This means the user decides on
+the flow of the user interface, meaning, any flow diagram displayed here would
+miss the point of the modularity of this user interface design.
+\par
+
